@@ -12,6 +12,7 @@ complete a link between this content and that required for tools and standards (
 Accellera SA-EDI standard); and 
 4. List any structure or content missing from these databases that would help with further 
 automation (such as versioning, etc.). 
+5. Collaboratively determine performance/scalability requirements by providing abstract use cases 
 
 This effort will require your attendance at virtual meetings, once a week, likely through the end of 2022. At the end of this process, the Working Group will provide development and design support, and deliver a document and any other collateral that can be used by MITRE to craft the required infrastructure to support the RESTful API. 
 
