@@ -1,0 +1,257 @@
+[
+    {
+        "created": "2014-06-23T00:00:00.000Z",
+        "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+        "description": "This attack exploits target software that constructs SQL statements based on user input. An attacker crafts input strings so that when the target software constructs SQL statements based on the input, the resulting SQL statement performs actions other than those the application intended. SQL Injection results from failure of the application to appropriately validate input.",
+        "external_references": [
+            {
+                "external_id": "CAPEC-66",
+                "source_name": "capec",
+                "url": "https://capec.mitre.org/data/definitions/66.html"
+            },
+            {
+                "description": "SQL Injection",
+                "external_id": "19",
+                "source_name": "WASC",
+                "url": "http://projects.webappsec.org/SQL-Injection"
+            },
+            {
+                "description": "SQL Injection",
+                "source_name": "OWASP Attacks",
+                "url": "https://owasp.org/www-community/attacks/SQL_Injection"
+            },
+            {
+                "description": "OWASP Web Security Testing Guide, The Open Web Application Security Project (OWASP)",
+                "external_id": "REF-607",
+                "source_name": "reference_from_CAPEC",
+                "url": "https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/07-Input_Validation_Testing/05-Testing_for_SQL_Injection.html"
+            }
+        ],
+        "id": "attack-pattern--42acc604-a86c-46f7-bd03-6e532c02d85e",
+        "modified": "2022-02-22T00:00:00.000Z",
+        "name": "SQL Injection",
+        "spec_version": "2.1",
+        "type": "attack-pattern",
+        "extensions": {
+            "extension-definition--7ee81e4a-8f83-4769-b915-d5631c698a98": {"extension_type": "toplevel-property-extension"}
+        },
+        "capec_id": 66,
+        "abstraction": "Standard",
+        "status": "Draft",
+        "extended_description": {"xhtml:p": "When specially crafted user-controlled input consisting of SQL syntax is used without proper validation as part of SQL queries, it is possible to glean information from the database in ways not envisaged during application design. Depending upon the database and the design of the application, it may also be possible to leverage injection to have the database execute system-related commands of the attackers' choice. SQL Injection enables an attacker to interact directly to the database, thus bypassing the application completely. Successful injection can cause information disclosure as well as ability to add or modify data in the database."},
+        "likelihood_of_attack": "High",
+        "typical_severity": "High",
+        "execution_flow": {
+            "attack_steps": [
+                {
+                    "step": 1,
+                    "phase": "Explore",
+                    "description": "[Survey application] The attacker first takes an inventory of the functionality exposed by the application.",
+                    "techniques": [
+                        "Spider web sites for all available links",
+                        "Sniff network communications with application using a utility such as WireShark."
+                    ]
+                },
+                {
+                    "step": 2,
+                    "phase": "Experiment",
+                    "description": "[Determine user-controllable input susceptible to injection] Determine the user-controllable input susceptible to injection. For each user-controllable input that the attacker suspects is vulnerable to SQL injection, attempt to inject characters that have special meaning in SQL (such as a single quote character, a double quote character, two hyphens, a parenthesis, etc.). The goal is to create a SQL query with an invalid syntax.",
+                    "techniques": [
+                        "Use web browser to inject input through text fields or through HTTP GET parameters.",
+                        "Use a web application debugging tool such as Tamper Data, TamperIE, WebScarab,etc. to modify HTTP POST parameters, hidden fields, non-freeform fields, etc.",
+                        "Use network-level packet injection tools such as netcat to inject input",
+                        "Use modified client (modified by reverse engineering) to inject input."
+                    ]
+                },
+                {
+                    "step": 3,
+                    "phase": "Experiment",
+                    "description": "[Experiment with SQL Injection vulnerabilities] After determining that a given input is vulnerable to SQL Injection, hypothesize what the underlying query looks like. Iteratively try to add logic to the query to extract information from the database, or to modify or delete information in the database.",
+                    "techniques": [
+                        "Use public resources such as \"SQL Injection Cheat Sheet\" at http://ferruh.mavituna.com/makale/sql-injection-cheatsheet/, and try different approaches for adding logic to SQL queries.",
+                        "Add logic to query, and use detailed error messages from the server to debug the query. For example, if adding a single quote to a query causes an error message, try : \"' OR 1=1; --\", or something else that would syntactically complete a hypothesized query. Iteratively refine the query.",
+                        "Use \"Blind SQL Injection\" techniques to extract information about the database schema.",
+                        "If a denial of service attack is the goal, try stacking queries. This does not work on all platforms (most notably, it does not work on Oracle or MySQL). Examples of inputs to try include: \"'; DROP TABLE SYSOBJECTS; --\" and \"'); DROP TABLE SYSOBJECTS; --\". These particular queries will likely not work because the SYSOBJECTS table is generally protected."
+                    ]
+                },
+                {
+                    "step": 4,
+                    "phase": "Exploit",
+                    "description": "[Exploit SQL Injection vulnerability] After refining and adding various logic to SQL queries, craft and execute the underlying SQL query that will be used to attack the target system. The goal is to reveal, modify, and/or delete database data, using the knowledge obtained in the previous step. This could entail crafting and executing multiple SQL queries if a denial of service attack is the intent.",
+                    "techniques": ["Craft and Execute underlying SQL query"]
+                }
+            ]
+        },
+        "prerequisites": [
+            "SQL queries used by the application to store, retrieve or modify data.",
+            "User-controllable input that is not properly validated by the application as part of SQL queries."
+        ],
+        "skills_required": [
+            {
+                "Level": "Low",
+                "#text": "It is fairly simple for someone with basic SQL knowledge to perform SQL injection, in general. In certain instances, however, specific knowledge of the database employed may be required."
+            }
+        ],
+        "resources_required": ["None: No specialized resources are required to execute this type of attack."],
+        "indicators": ["Too many false or invalid queries to the database, especially those caused by malformed input."],
+        "consequences": [
+            {
+                "scope": "Access_Control",
+                "impact": ["Gain Privileges"]
+            },
+            {
+                "scope": "Authorization",
+                "impact": ["Gain Privileges"]
+            },
+            {
+                "scope": "Availability",
+                "impact": ["Execute Unauthorized Commands (Run Arbitrary Code)"]
+            },
+            {
+                "scope": "Confidentiality",
+                "impact": [
+                    "Read Data",
+                    "Execute Unauthorized Commands (Run Arbitrary Code)",
+                    "Gain Privileges"
+                ]
+            },
+            {
+                "scope": "Integrity",
+                "impact": [
+                    "Modify Data",
+                    "Execute Unauthorized Commands (Run Arbitrary Code)"
+                ]
+            }
+        ],
+        "example_instances": [
+            "With PHP-Nuke versions 7.9 and earlier, an attacker can successfully access and modify data, including sensitive contents such as usernames and password hashes, and compromise the application through SQL Injection. The protection mechanism against SQL Injection employs a denylist approach to input validation. However, because of an improper denylist, it is possible to inject content such as \"foo'/**/UNION\" or \"foo UNION/**/\" to bypass validation and glean sensitive information from the database. See also: CVE-2006-5525"
+        ]
+    },
+    {
+        "created": "2014-06-23T00:00:00.000Z",
+        "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+        "id": "relationship--8bc84555-2eda-4653-91db-ab12268de92f",
+        "modified": "2021-06-24T00:00:00.000Z",
+        "object_marking_refs": ["marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"],
+        "relationship_type": "child-of",
+        "source_ref": "attack-pattern--42acc604-a86c-46f7-bd03-6e532c02d85e",
+        "spec_version": "2.1",
+        "target_ref": "attack-pattern--2fb2b2b8-b7de-45a2-aadb-5849d12fda8f",
+        "type": "relationship",
+        "x_capec_version": "3.7"
+    },
+    {
+        "created": "2014-06-23T00:00:00.000Z",
+        "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+        "id": "relationship--3106e809-08cd-4416-bddc-08911b48c55b",
+        "modified": "2021-06-24T00:00:00.000Z",
+        "object_marking_refs": ["marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"],
+        "relationship_type": "child-of",
+        "source_ref": "attack-pattern--42acc604-a86c-46f7-bd03-6e532c02d85e",
+        "spec_version": "2.1",
+        "target_ref": "weakness--52e4ec9f-0ca4-41fe-8552-b5b3b5aee36c",
+        "type": "relationship",
+        "x_capec_version": "3.7"
+    },
+    {
+        "created": "2014-06-23T00:00:00.000Z",
+        "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+        "id": "relationship--2ec4f84a-0384-4768-a4c3-a9efcd14b664",
+        "modified": "2021-06-24T00:00:00.000Z",
+        "object_marking_refs": ["marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"],
+        "relationship_type": "related-weakness",
+        "source_ref": "attack-pattern--42acc604-a86c-46f7-bd03-6e532c02d85e",
+        "spec_version": "2.1",
+        "target_ref": "weakness--dc149217-847c-4ab9-b4b6-f45766630cdb",
+        "type": "relationship",
+        "x_capec_version": "3.7"
+    },
+    {
+            "created": "2014-06-23T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "id": "relationship--5fc50ca5-d17c-4f39-96d4-795ef6ac0bb1",
+            "modified": "2022-02-22T00:00:00.000Z",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "relationship_type": "mitigates",
+            "source_ref": "course-of-action--3b3ecd49-a48b-4908-b854-071ac6b15f1c",
+            "spec_version": "2.1",
+            "target_ref": "attack-pattern--42acc604-a86c-46f7-bd03-6e532c02d85e",
+            "type": "relationship",
+            "x_capec_version": "3.7"
+        },
+        {
+            "created": "2014-06-23T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "id": "relationship--a93f8f1b-9607-4383-9b6f-7be3de09fc48",
+            "modified": "2022-02-22T00:00:00.000Z",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "relationship_type": "mitigates",
+            "source_ref": "course-of-action--07cbed26-8c96-41e6-a239-7be587a38673",
+            "spec_version": "2.1",
+            "target_ref": "attack-pattern--42acc604-a86c-46f7-bd03-6e532c02d85e",
+            "type": "relationship",
+            "x_capec_version": "3.7"
+        },
+        {
+            "created": "2014-06-23T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "id": "relationship--df5e28f8-bb74-4412-960d-bef6cec27c9f",
+            "modified": "2022-02-22T00:00:00.000Z",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "relationship_type": "mitigates",
+            "source_ref": "course-of-action--618c2d85-ca76-40a0-a019-0ac9ba1b0989",
+            "spec_version": "2.1",
+            "target_ref": "attack-pattern--42acc604-a86c-46f7-bd03-6e532c02d85e",
+            "type": "relationship",
+            "x_capec_version": "3.7"
+        },
+        {
+            "created": "2014-06-23T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "Use of parameterized queries or stored procedures - Parameterization causes the input to be restricted to certain domains, such as strings or integers, and any input outside such domains is considered invalid and the query fails. Note that SQL Injection is possible even in the presence of stored procedures if the eventual query is constructed dynamically.",
+            "id": "course-of-action--3b3ecd49-a48b-4908-b854-071ac6b15f1c",
+            "modified": "2022-02-22T00:00:00.000Z",
+            "name": "coa-66-1",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "spec_version": "2.1",
+            "type": "course-of-action",
+            "x_capec_version": "3.7"
+        },
+         {
+            "created": "2014-06-23T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "Strong input validation - All user-controllable input must be validated and filtered for illegal characters as well as SQL content. Keywords such as UNION, SELECT or INSERT must be filtered in addition to characters such as a single-quote(') or SQL-comments (--) based on the context in which they appear.",
+            "id": "course-of-action--07cbed26-8c96-41e6-a239-7be587a38673",
+            "modified": "2022-02-22T00:00:00.000Z",
+            "name": "coa-66-0",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "spec_version": "2.1",
+            "type": "course-of-action",
+            "x_capec_version": "3.7"
+        },
+         {
+            "created": "2014-06-23T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "Use of custom error pages - Attackers can glean information about the nature of queries from descriptive error messages. Input validation must be coupled with customized error pages that inform about an error without disclosing information about the database or application.",
+            "id": "course-of-action--618c2d85-ca76-40a0-a019-0ac9ba1b0989",
+            "modified": "2022-02-22T00:00:00.000Z",
+            "name": "coa-250-1",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "spec_version": "2.1",
+            "type": "course-of-action",
+            "x_capec_version": "3.7"
+        }
+        
+]

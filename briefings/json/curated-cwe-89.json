@@ -1,0 +1,181 @@
+{
+    "created": "2014-06-23T00:00:00.000Z",
+    "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+    "description": "The software constructs all or part of an SQL command using externally-influenced input from an upstream component, but it does not neutralize or incorrectly neutralizes special elements that could modify the intended SQL command when it is sent to a downstream component.",
+    "external_references": [
+        {
+            "external_id": "REF-44",
+            "Section": "\"Sin 1: SQL Injection.\" Page 3"
+        },
+        {
+            "external_id": "CVE-2004-0366",
+            "source_name": "cve",
+            "description": "chain: SQL injection in library intended for database authentication allows SQL injection and authentication bypass.",
+            "url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-0366"
+        },
+        {
+            "external_id": "CVE-2008-2790",
+            "source_name": "cve",
+            "description": "SQL injection through an ID that was supposed to be numeric.",
+            "url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-2790"
+        },
+        {
+            "source_name": "PLOVER",
+            "description": "SQL injection"
+        },
+        {
+            "source_name": "7 Pernicious Kingdoms",
+            "description": "SQL Injection"
+        },
+        {
+            "source_name": "CLASP",
+            "description": "SQL injection"
+        },
+        {
+            "source_name": "OWASP Top Ten 2007",
+            "external_id": "A2",
+            "description": "Injection Flaws"
+        },
+        {
+            "source_name": "OWASP Top Ten 2004",
+            "external_id": "A1",
+            "description": "Unvalidated Input"
+        },
+        {
+            "source_name": "OWASP Top Ten 2004",
+            "external_id": "A6",
+            "description": "Injection Flaws"
+        },
+        {
+            "source_name": "WASC",
+            "external_id": 19,
+            "description": "SQL Injection"
+        },
+        {
+            "source_name": "Software Fault Patterns",
+            "external_id": "SFP24",
+            "description": "Tainted input to command"
+        },
+        {
+            "source_name": "OMG ASCSM",
+            "external_id": "ASCSM-CWE-89"
+        },
+        {
+            "source_name": "SEI CERT Oracle Coding Standard for Java",
+            "external_id": "IDS00-J",
+            "description": "Prevent SQL injection"
+        }
+    ],
+    "id": "weakness--52e4ec9f-0ca4-41fe-8552-b5b3b5aee36c",
+    "name": "Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')",
+    "type": "weakness",
+    "extensions": {
+        "extension-definition--485c8807-5df3-460d-a546-149d118e8677": {"extension_type": "new_sdo"}
+    },
+    "cwe_id": 89,
+    "abstraction": "Base",
+    "structure": "Simple",
+    "status": "Stable",
+    "extended_description": "<xhtml:p>Without sufficient removal or quoting of SQL syntax in user-controllable inputs, the generated SQL query can cause those inputs to be interpreted as SQL instead of ordinary user data. This can be used to alter query logic to bypass security checks, or to insert additional statements that modify the back-end database, possibly including execution of system commands.\nSQL injection has become a common issue with database-driven web sites. The flaw is easily detected, and easily exploited, and as such, any site or software package with even a minimal user base is likely to be subject to an attempted attack of this kind. This flaw depends on the fact that SQL makes no real distinction between the control and data planes.",
+    "child_of_refs": [
+        "weakness--03cb4f54-5e35-483f-80d3-373bc7e734aa",
+        "weakness--e8b93910-490a-420f-ba83-45bed78cf92e"
+    ],
+    "applicable_platforms": {
+        "Language": {
+            "class": "Language-Independent",
+            "prevalence": "Undetermined"
+        },
+        "Technology": {
+            "name": "Database Server",
+            "prevalence": "Undetermined"
+        }
+    },
+    "modes_of_introduction": [
+        {
+            "phase": "Architecture and Design",
+            "note": "This weakness typically appears in data-rich applications that save user inputs in a database."
+        },
+        {
+            "phase": "Implementation",
+            "note": "REALIZATION: This weakness is caused during implementation of an architectural security tactic."
+        }
+    ],
+    "likelihood_of_exploit": "High",
+    "common_consequences": [
+        {
+            "scope": "Confidentiality",
+            "impact": "Read Application Data",
+            "note": "Since SQL databases generally hold sensitive data, loss of confidentiality is a frequent problem with SQL injection vulnerabilities."
+        },
+        {
+            "scope": "Access Control",
+            "impact": "Bypass Protection Mechanism",
+            "note": "If poor SQL commands are used to check user names and passwords, it may be possible to connect to a system as another user with no previous knowledge of the password."
+        },
+        {
+            "scope": "Access Control",
+            "impact": "Bypass Protection Mechanism",
+            "note": "If authorization information is held in a SQL database, it may be possible to change this information through the successful exploitation of a SQL injection vulnerability."
+        },
+        {
+            "scope": "Integrity",
+            "impact": "Modify Application Data",
+            "note": "Just as it may be possible to read sensitive information, it is also possible to make changes or even delete this information with a SQL injection attack."
+        }
+    ],
+    "detection_methods": [
+        {
+            "detection_method_id": "DM-1",
+            "method": "Automated Static Analysis",
+            "escription": "<xhtml:p>This weakness can often be detected using automated static analysis tools. Many modern tools use data flow analysis or constraint-based techniques to minimize the number of false positives.</xhtml:p><xhtml:p>Automated static analysis might not be able to recognize when proper input validation is being performed, leading to false positives - i.e., warnings that do not have any security consequences or do not require any code changes.</xhtml:p><xhtml:p>Automated static analysis might not be able to detect the usage of custom API functions or third-party libraries that indirectly invoke SQL commands, leading to false negatives - especially if the API/library code is not available for analysis.</xhtml:p>",
+            "Effectiveness_Notes": "This is not a perfect solution, since 100% accuracy and coverage are not feasible."
+        },
+        {
+            "Method": "Automated Static Analysis - Binary or Bytecode",
+            "Description": "<xhtml:p>According to SOAR, the following detection techniques may be useful:</xhtml:p><xhtml:div style=\"margin-left:10px;\"><xhtml:div>Highly cost effective:</xhtml:div><xhtml:div style=\"margin-left:10px;\"><xhtml:ul><xhtml:li>Bytecode Weakness Analysis - including disassembler + source code weakness analysis</xhtml:li><xhtml:li>Binary Weakness Analysis - including disassembler + source code weakness analysis</xhtml:li></xhtml:ul></xhtml:div></xhtml:div>",
+            "Effectiveness": "High"
+        }
+    ],
+    "potential_mitigations": [
+        {
+            "mitigation_id": "MIT-4",
+            "phase": "Architecture and Design",
+            "strategy": "Libraries or Frameworks",
+            "description": "<xhtml:p>Use a vetted library or framework that does not allow this weakness to occur or provides constructs that make this weakness easier to avoid.</xhtml:p><xhtml:p>For example, consider using persistence layers such as Hibernate or Enterprise Java Beans, which can provide significant protection against SQL injection if used properly.</xhtml:p>"
+        }
+    ],
+    "demonstrative_examples": [
+        {
+            "intro_text": "In 2008, a large number of web servers were compromised using the same SQL injection attack string. This single string worked against many different programs. The SQL injection was then used to modify the web sites to serve malicious code."},
+        {
+            "intro_text": "The following code dynamically constructs and executes a SQL query that searches for items matching a specified name. The query restricts the items displayed to those where owner matches the user name of the currently-authenticated user.",
+            "example_code": {
+                "Nature": "bad",
+                "Language": "C#",
+                "body": [
+                    {"code": "<xhtml:div>...<xhtml:br/>string userName = ctx.getAuthenticatedUserName();<xhtml:br/>string query = &quot;SELECT * FROM items WHERE owner = &apos;&quot; + userName + &quot;&apos; AND itemname = &apos;&quot; + ItemName.Text + &quot;&apos;&quot;;<xhtml:br/>sda = new SqlDataAdapter(query, conn);<xhtml:br/>DataTable dt = new DataTable();<xhtml:br/>sda.Fill(dt);<xhtml:br/>...</xhtml:div>"},
+                    {
+                        "body_text": "The query that this code intends to execute follows:",
+                        "nature": "informative",
+                        "code": "<xhtml:div>SELECT * FROM items WHERE owner = &lt;userName&gt; AND itemname = &lt;itemName&gt;;</xhtml:div>"
+                    },
+                    {
+                        "body_text": "However, because the query is constructed dynamically by concatenating a constant base query string and a user input string, the query only behaves correctly if itemName does not contain a single-quote character. If an attacker with the user name wiley enters the string:",
+                        "nature": "attack",
+                        "code": "<xhtml:div>name' OR 'a'='a</xhtml:div>"
+                    }
+                ]
+            }
+        }
+    ],
+    "related_attack_attern_refs":  [
+        "attack-pattern--42acc604-a86c-46f7-bd03-6e532c02d85e"
+    ],
+    "notes": [
+        {
+            "Type": "Relationship",
+            "#text": "SQL injection can be resultant from special character mismanagement, MAID, or denylist/allowlist problems. It can be primary to authentication errors."
+        }
+    ]
+}
