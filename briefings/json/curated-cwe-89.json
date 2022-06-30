@@ -129,12 +129,12 @@
             "detection_method_id": "DM-1",
             "method": "Automated Static Analysis",
             "escription": "<xhtml:p>This weakness can often be detected using automated static analysis tools. Many modern tools use data flow analysis or constraint-based techniques to minimize the number of false positives.</xhtml:p><xhtml:p>Automated static analysis might not be able to recognize when proper input validation is being performed, leading to false positives - i.e., warnings that do not have any security consequences or do not require any code changes.</xhtml:p><xhtml:p>Automated static analysis might not be able to detect the usage of custom API functions or third-party libraries that indirectly invoke SQL commands, leading to false negatives - especially if the API/library code is not available for analysis.</xhtml:p>",
-            "Effectiveness_Notes": "This is not a perfect solution, since 100% accuracy and coverage are not feasible."
+            "effectiveness_notes": "This is not a perfect solution, since 100% accuracy and coverage are not feasible."
         },
         {
-            "Method": "Automated Static Analysis - Binary or Bytecode",
-            "Description": "<xhtml:p>According to SOAR, the following detection techniques may be useful:</xhtml:p><xhtml:div style=\"margin-left:10px;\"><xhtml:div>Highly cost effective:</xhtml:div><xhtml:div style=\"margin-left:10px;\"><xhtml:ul><xhtml:li>Bytecode Weakness Analysis - including disassembler + source code weakness analysis</xhtml:li><xhtml:li>Binary Weakness Analysis - including disassembler + source code weakness analysis</xhtml:li></xhtml:ul></xhtml:div></xhtml:div>",
-            "Effectiveness": "High"
+            "method": "Automated Static Analysis - Binary or Bytecode",
+            "description": "<xhtml:p>According to SOAR, the following detection techniques may be useful:</xhtml:p><xhtml:div style=\"margin-left:10px;\"><xhtml:div>Highly cost effective:</xhtml:div><xhtml:div style=\"margin-left:10px;\"><xhtml:ul><xhtml:li>Bytecode Weakness Analysis - including disassembler + source code weakness analysis</xhtml:li><xhtml:li>Binary Weakness Analysis - including disassembler + source code weakness analysis</xhtml:li></xhtml:ul></xhtml:div></xhtml:div>",
+            "effectiveness": "High"
         }
     ],
     "potential_mitigations": [
