@@ -1,0 +1,618 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/output/schema",
+  "type": "object",
+  "properties": {
+    "ID": {
+      "type": "string"
+    },
+    "Name": {
+      "type": "string"
+    },
+    "Abstraction": {
+      "type": "string",
+      "enum": [ "Pillar", "Class", "Base", "Variant", "Compound"]
+    },
+    "Structure": {
+      "type": "string",
+      "enum": [ "Chain", "Composite", "Simple"]
+    },
+    "Status": {
+      "type": "string",
+      "enum": [ "Deprecated", "Draft", "Incomplete", "Obsolete", "Stable", "Usable"]
+    },
+    "Description": {
+      "type": "string"
+    },
+    "Extended_Description": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Likelihood_Of_Exploit": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "enum": [null, "High", "Medium", "Low", "Unknown"]
+    },
+    "Related_Weaknesses": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Nature": {
+                "type": "string",
+                "enum": [ "ChildOf", "ParentOf", "StartsWith", "CanFollow", "CanPrecede", "RequiredBy", "Requires", "CanAlsoBe", "PeerOf"]
+              },
+              "CWE_ID": {
+                "type": "string"
+              },
+              "View_ID": {
+                "type": "string"
+              },
+              "Ordinal": {
+                "type": "string",
+                "enum": ["Primary"]
+              },
+              "Chain_ID": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "CWE_ID",
+              "Nature",
+              "View_ID"
+            ] 
+          }
+        }
+      ]
+    },
+    "Weakness_Ordinalities": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Ordinality": {
+                "type": "string",
+                "enum": [ "Indirect", "Primary", "Resultant"]
+              },
+              "Description": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "Ordinality"
+            ]
+          }
+        }
+      ]
+    },
+    "Applicable_Platforms": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Type": {
+                "type": "string",
+                "enum": ["Language", "Operating_System","Architecture","Technology"]
+              },
+              "Class": {
+                "type": "string"
+              },
+              "Prevalence": {
+                "type": "string"
+              },
+              "Name": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "Prevalence",
+              "Type"
+            ]
+          }
+        }
+      ]
+    },
+    "Background_Details": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "Alternate_Terms": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Term": {
+                "type": "string"
+              },
+              "Description": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "Term"
+            ]
+          }
+        }
+      ]
+    },
+    "Modes_Of_Introduction": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Phase": {
+                "type": "string",
+                "enum": [ "Policy", "Requirements", "Architecture and Design", "Implementation", "Build and Compilation", "Testing", "Documentation", "Bundling", "Distribution", "Installation", "System Configuration", "Operation", "Patching and Maintenance", "Porting", "Integration", "Manufacturing"]
+              },
+              "Note": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "Phase"
+            ]
+          }
+        }
+      ]
+    },
+    "Common_Consequences": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Scope": {
+                "type": "string",
+                "enum": [ "Confidentiality", "Integrity", "Availability", "Access Control", "Accountability", "Authentication", "Authorization", "Non-Repudiation", "Other"]
+              },
+              "Impact": {
+                "type": "string",
+                "enum": [ "Modify Memory", "Read Memory", "Modify Files or Directories", "Read Files or Directories", "Modify Application Data", "Read Application Data", "DoS: Crash, Exit, or Restart", "DoS: Amplification", "DoS: Instability", "DoS: Resource Consumption (CPU)", "DoS: Resource Consumption (Memory)", "DoS: Resource Consumption (Other)", "Execute Unauthorized Code or Commands", "Gain Privileges or Assume Identity", "Bypass Protection Mechanism", "Hide Activities", "Alter Execution Logic", "Quality Degradation", "Unexpected State", "Varies by Context", "Reduce Maintainability", "Reduce Performance", "Reduce Reliability", "Other"]
+              },
+              "Note": {
+                "type": "string"
+              },
+              "Likelihood": {
+                "type": "string",
+                "enum": ["High", "Medium", "Low", "Unknown"]
+              }
+            },
+            "required": [
+              "Scope"
+            ]
+          }
+        }
+      ]
+    },
+    "Detection_Methods": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Method": {
+                "type": "string",
+                "enum": [ "Automated Analysis", "Automated Dynamic Analysis", "Automated Static Analysis", "Automated Static Analysis - Source Code", "Automated Static Analysis - Binary or Bytecode", "Fuzzing", "Manual Analysis", "Manual Dynamic Analysis", "Manual Static Analysis", "Manual Static Analysis - Source Code", "Manual Static Analysis - Binary or Bytecode", "White Box", "Black Box", "Architecture or Design Review", "Dynamic Analysis with Manual Results Interpretation", "Dynamic Analysis with Automated Results Interpretation", "Formal Verification", "Simulation / Emulation", "Other"]
+              },
+              "Description": {
+                "type": "string"
+              },
+              "Effectiveness": {
+                "type": "string",
+                "enum": [ "High", "Moderate", "SOAR Partial", "Opportunistic", "Limited", "None"]
+              },
+              "Detection_Method_ID": {
+                "type": "string"
+              },
+              "Effectiveness_Notes": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "Description",
+              "Method"
+            ]
+          }
+        }
+      ]
+    },
+    "Potential_Mitigations": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Phase": {
+                "type": "string",
+                "enum": [ "Policy", "Requirements", "Architecture and Design", "Implementation", "Build and Compilation", "Testing", "Documentation", "Bundling", "Distribution", "Installation", "System Configuration", "Operation", "Patching and Maintenance", "Porting", "Integration", "Manufacturing"]
+              },
+              "Description": {
+                "type": "string"
+              },
+              "Mitigation_ID": {
+                "type": "string"
+              },
+              "Strategy": {
+                "type": "string",
+                "enum": [ "Attack Surface Reduction", "Compilation or Build Hardening", "Enforcement by Conversion", "Environment Hardening", "Firewall", "Input Validation", "Language Selection", "Libraries or Frameworks", "Resource Limitation", "Output Encoding", "Parameterization", "Refactoring", "Sandbox or Jail", "Separation of Privilege"]
+              },
+              "Effectiveness": {
+                "type": "string",
+                "enum": [ "High", "Moderate", "Limited", "Incidental", "Discouraged Common Practice", "Defense in Depth", "None"]
+              },
+              "Effectiveness_Notes": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "Description"
+            ]
+          }
+        }
+      ]
+    },
+    "Demonstrative_Examples": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Demonstrative_Example": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "Intro_Text": {
+                  "type": "string"
+                },
+                "Example_Code": {
+                  "type": "string"
+                },
+                "Nature": {
+                  "type": "string",
+                  "enum": [ "attack", "bad", "good", "informative", "mitigation", "result"]
+                },
+                "Language": {
+                  "type": "string",
+                  "enum": [ "Ada", "ASP", "ASP.NET", "Basic", "C", "C++", "C#", "COBOL", "Fortran", "F#", "Go", "HTML", "Java", "JavaScript", "JSP", "Objective-C", "Pascal", "Perl", "PHP", "Python", "Ruby", "Rust", "Shell", "SQL", "Swift", "VB.NET", "Verilog", "VHDL", "XML", "Other"]
+                },
+                "Body_Text": {
+                  "type": "string"
+                },
+                "References": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "Demonstrative_Example_ID": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "Demonstrative_Example"
+        ]
+      }
+    },
+    "Observed_Examples": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Reference": {
+                "type": "string"
+              },
+              "Description": {
+                "type": "string"
+              },
+              "Link": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "Description",
+              "Link",
+              "Reference"
+            ]
+          }
+        }
+      ]
+    },
+    "Functional_Areas": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [ "Authentication", "Authorization", "Code Libraries", "Counters", "Cryptography", "Error Handling", "Interprocess Communication", "File Processing", "Logging", "Memory Management", "Networking", "Number Processing", "Program Invocation", "Protection Mechanism", "Session Management", "Signals", "String Processing", "Functional-Area-Independent", "Power", "Clock"]
+          }
+        }
+      ]
+    },
+    "Affected_Resources": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [ "CPU", "File or Directory", "Memory", "System Process", "Other"]
+          }
+        }
+      ]
+    },
+    "Taxonomy_Mappings": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Taxonomy_Name": {
+                "type": "string",
+                "enum": [ "7 Pernicious Kingdoms", "19 Deadly Sins", "Aslam", "Bishop", "CLASP", "Landwehr", "OMG ASCSM", "OMG ASCRM", "OMG ASCMM", "OMG ASCPEM", "OWASP Top Ten 2004", "OWASP Top Ten 2007", "OWASP Top Ten", "PLOVER", "Protection Analysis", "RISOS", "Weber, Karger, Paradkar", "WASC", "CERT C Secure Coding", "CERT C++ Secure Coding", "The CERT Oracle Secure Coding Standard for Java (2011)", "SEI CERT C Coding Standard", "SEI CERT C++ Coding Standard", "SEI CERT Oracle Coding Standard for Java", "SEI CERT Perl Coding Standard", "Software Fault Patterns"]
+              },
+              "Entry_ID": {
+                "type": "string"
+              },
+              "Entry_Name": {
+                "type": "string"
+              },
+              "Mapping_Fit": {
+                "type": "string",
+                "enum": [ "Exact", "CWE More Abstract", "CWE More Specific", "Imprecise", "Perspective"]
+              }
+            },
+            "required": [
+              "Taxonomy_Name"
+            ]
+          }
+        }
+      ]
+    },
+    "Related_CAPEC_Attack_Patterns": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "References": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "External_Reference_ID": {
+                "type": "string"
+              },
+              "Section": {
+                "type": "string"
+              },
+              "Authors": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "Title": {
+                "type": "string"
+              },
+              "Publication": {
+                "type": "string"
+              },
+              "Publication_Year": {
+                "type": "string"
+              },
+              "Publication_Month": {
+                "type": "string"
+              },
+              "URL": {
+                "type": "string"
+              },
+              "Publication_Day": {
+                "type": "string"
+              },
+              "Publisher": {
+                "type": "string"
+              },
+              "Edition": {
+                "type": "string"
+              },
+              "URL_Date": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "External_Reference_ID",
+              "Title"
+            ]
+          }
+        }
+      ]
+    },
+    "Notes": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Type": {
+                "type": "string",
+                "enum": [ "Applicable Platform", "Maintenance", "Relationship", "Research Gap", "Terminology", "Theoretical", "Other"]
+              },
+              "Note": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "Note",
+              "Type"
+            ]
+          }
+        }
+      ]
+    },
+    "Content_History": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Submission_Name": {
+            "type": "string"
+          },
+          "Submission_Date": {
+            "type": "string"
+          },
+          "Modification_Name": {
+            "type": "string"
+          },
+          "Modification_Organization": {
+            "type": "string"
+          },
+          "Modification_Date": {
+            "type": "string"
+          },
+          "Modification_Comment": {
+            "type": "string"
+          },
+          "Date": {
+            "type": "string"
+          },
+          "Previous_Entry_Name": {
+            "type": "string"
+          },
+          "Submission_Organization": {
+            "type": "string"
+          },
+          "Submission_Comment": {
+            "type": "string"
+          },
+          "Type": {
+            "type": "string",
+            "enum": [ "Content", "Feedback"]
+          },
+          "Contribution_Name": {
+            "type": "string"
+          },
+          "Contribution_Organization": {
+            "type": "string"
+          },
+          "Contribution_Date": {
+            "type": "string"
+          },
+          "Contribution_Comment": {
+            "type": "string"
+          },
+          "Modification_Importance": {
+            "type": "string",
+            "enum": [ "Normal", "Critical"]
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "Abstraction",
+    "Affected_Resources",
+    "Alternate_Terms",
+    "Applicable_Platforms",
+    "Background_Details",
+    "Common_Consequences",
+    "Content_History",
+    "Demonstrative_Examples",
+    "Description",
+    "Detection_Methods",
+    "Extended_Description",
+    "Functional_Areas",
+    "ID",
+    "Likelihood_Of_Exploit",
+    "Modes_Of_Introduction",
+    "Name",
+    "Notes",
+    "Observed_Examples",
+    "Potential_Mitigations",
+    "References",
+    "Related_CAPEC_Attack_Patterns",
+    "Related_Weaknesses",
+    "Status",
+    "Structure",
+    "Taxonomy_Mappings",
+    "Weakness_Ordinalities"
+  ]
+}

@@ -1,0 +1,656 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "type": "object",
+  "properties": {
+    "ID": {
+      "type": "string"
+    },
+    "Name": {
+      "type": "string"
+    },
+    "Type": {
+      "type": "string"
+    },
+    "Status": {
+      "type": "string"
+    },
+    "Objective": {
+      "type": "string"
+    },
+    "Audience": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Type": {
+                "type": "string"
+              },
+              "Description": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "Type"
+            ]
+          }
+        }
+      ]
+    },
+    "Members": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "CWE_ID": {
+                "type": "string"
+              },
+              "View_ID": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "CWE_ID",
+              "View_ID"
+            ]
+          }
+        }
+      ]
+    },
+    "References": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "External_Reference_ID": {
+                "type": "string"
+              },
+              "Authors": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "Title": {
+                "type": "string"
+              },
+              "URL": {
+                "type": "string"
+              },
+              "Publication_Year": {
+                "type": "string"
+              },
+              "Publication_Month": {
+                "type": "string"
+              },
+              "Publication_Day": {
+                "type": "string"
+              },
+              "Publication": {
+                "type": "string"
+              },
+              "Publisher": {
+                "type": "string"
+              },
+              "Section": {
+                "type": "string"
+              },
+              "Edition": {
+                "type": "string"
+              },
+              "URL_Date": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "External_Reference_ID",
+              "Title"
+            ]
+          }
+        }
+      ]
+    },
+    "Notes": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Type": {
+                "type": "string"
+              },
+              "Note": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "Note",
+              "Type"
+            ]
+          }
+        }
+      ]
+    },
+    "Content_History": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Submission_Name": {
+            "type": "string"
+          },
+          "Submission_Organization": {
+            "type": "string"
+          },
+          "Submission_Date": {
+            "type": "string"
+          },
+          "Modification_Name": {
+            "type": "string"
+          },
+          "Modification_Organization": {
+            "type": "string"
+          },
+          "Modification_Date": {
+            "type": "string"
+          },
+          "Modification_Comment": {
+            "type": "string"
+          },
+          "Date": {
+            "type": "string"
+          },
+          "Previous_Entry_Name": {
+            "type": "string"
+          },
+          "Type": {
+            "type": "string"
+          },
+          "Contribution_Name": {
+            "type": "string"
+          },
+          "Contribution_Date": {
+            "type": "string"
+          },
+          "Contribution_Comment": {
+            "type": "string"
+          },
+          "Submission_Comment": {
+            "type": "string"
+          },
+          "Contribution_Organization": {
+            "type": "string"
+          },
+          "Modification_Importance": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Summary": {
+      "type": "string"
+    },
+    "Taxonomy_Mappings": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Taxonomy_Name": {
+                "type": "string"
+              },
+              "Entry_Name": {
+                "type": "string"
+              },
+              "Entry_ID": {
+                "type": "string"
+              },
+              "Mapping_Fit": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "Taxonomy_Name"
+            ]
+          }
+        }
+      ]
+    },
+    "Relationships": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "CWE_ID": {
+                "type": "string"
+              },
+              "View_ID": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "CWE_ID",
+              "View_ID"
+            ]
+          }
+        }
+      ]
+    },
+    "Abstraction": {
+      "type": "string"
+    },
+    "Structure": {
+      "type": "string"
+    },
+    "Description": {
+      "type": "string"
+    },
+    "Extended_Description": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Likelihood_Of_Exploit": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Related_Weaknesses": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Nature": {
+                "type": "string"
+              },
+              "CWE_ID": {
+                "type": "string"
+              },
+              "View_ID": {
+                "type": "string"
+              },
+              "Ordinal": {
+                "type": "string"
+              },
+              "Chain_ID": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "CWE_ID",
+              "Nature",
+              "View_ID"
+            ]
+          }
+        }
+      ]
+    },
+    "Weakness_Ordinalities": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Ordinality": {
+                "type": "string"
+              },
+              "Description": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "Ordinality"
+            ]
+          }
+        }
+      ]
+    },
+    "Applicable_Platforms": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Type": {
+                "type": "string"
+              },
+              "Class": {
+                "type": "string"
+              },
+              "Prevalence": {
+                "type": "string"
+              },
+              "Name": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "Prevalence",
+              "Type"
+            ]
+          }
+        }
+      ]
+    },
+    "Background_Details": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "Alternate_Terms": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Term": {
+                "type": "string"
+              },
+              "Description": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "Term"
+            ]
+          }
+        }
+      ]
+    },
+    "Modes_Of_Introduction": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Phase": {
+                "type": "string"
+              },
+              "Note": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "Phase"
+            ]
+          }
+        }
+      ]
+    },
+    "Common_Consequences": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Scope": {
+                "type": "string"
+              },
+              "Impact": {
+                "type": "string"
+              },
+              "Note": {
+                "type": "string"
+              },
+              "Likelihood": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "Scope"
+            ]
+          }
+        }
+      ]
+    },
+    "Detection_Methods": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Method": {
+                "type": "string"
+              },
+              "Description": {
+                "type": "string"
+              },
+              "Effectiveness": {
+                "type": "string"
+              },
+              "Effectiveness_Notes": {
+                "type": "string"
+              },
+              "Detection_Method_ID": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "Description",
+              "Method"
+            ]
+          }
+        }
+      ]
+    },
+    "Potential_Mitigations": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Phase": {
+                "type": "string"
+              },
+              "Description": {
+                "type": "string"
+              },
+              "Effectiveness": {
+                "type": "string"
+              },
+              "Effectiveness_Notes": {
+                "type": "string"
+              },
+              "Strategy": {
+                "type": "string"
+              },
+              "Mitigation_ID": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "Description"
+            ]
+          }
+        }
+      ]
+    },
+    "Demonstrative_Examples": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Demonstrative_Example": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "Intro_Text": {
+                  "type": "string"
+                },
+                "Body_Text": {
+                  "type": "string"
+                },
+                "Example_Code": {
+                  "type": "string"
+                },
+                "Nature": {
+                  "type": "string"
+                },
+                "Language": {
+                  "type": "string"
+                },
+                "References": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "Demonstrative_Example_ID": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "Demonstrative_Example"
+        ]
+      }
+    },
+    "Observed_Examples": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Reference": {
+                "type": "string"
+              },
+              "Description": {
+                "type": "string"
+              },
+              "Link": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "Description",
+              "Link",
+              "Reference"
+            ]
+          }
+        }
+      ]
+    },
+    "Functional_Areas": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "Affected_Resources": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "Related_CAPEC_Attack_Patterns": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      ]
+    }
+  },
+  "required": [
+    "Content_History",
+    "ID",
+    "Name",
+    "Notes",
+    "References", 
+    "Abstraction",
+    "Status"
+  ]
+}

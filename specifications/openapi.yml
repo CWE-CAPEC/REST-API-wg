@@ -1,0 +1,247 @@
+# Forked from https://github.com/ThreatDataScience/taxii2-openapi/blob/master/swagger.yaml
+openapi: '3.0.3'
+info:
+  version: "0.1"
+  title: "CWE-CAPEC API 0.1"
+  description: |
+    The CWE-CAPEC API specification defines the RESTful semantics for querying the
+    CWE and CAPEC data sets from MITRE hosted servers.
+  termsOfService: "TODO"
+  contact:
+    name: "CWE-CAPEC team"
+    url: "https://github.com/CWE-CAPEC/REST-API-wg"
+    email: 
+      - "cwe@mitre.org"
+      - "capec@mitre.org"
+  license:
+    name: MIT
+    url: http://opensource.org/licenses/MIT
+tags: 
+  # TODO
+
+paths:
+  /v1/:
+    get:
+      summary: |
+        Reports supported CWE content and schema versions, with
+        their associated response schema version. Includes release
+        dates and a list of API endpoints
+      operationId: getSupportedInfo
+      responses:
+        200:
+          description: Server API endpoint and version enumeration
+          schema:
+            $ref: # TODO
+        404:
+          description: No server information available
+  /v1/cwe/all/:
+    get:
+      summary: Get all CWEs
+      operationId: getAllCWE
+      description: |
+        This API endpoint returns all CWE weakness objects
+      responses:
+        200:
+          description: 
+          schema:
+            $ref: #TODO CWE Response schema
+        404:
+          description: CWEs at current version not found
+        429:
+          description: Too many requests within given time
+  /v1/capec/all/:
+    get:
+      summary: Get all CAPECs
+      operationId: getAPIRoot
+      description: |
+        This API endpoint returns all CAPECs
+      responses:
+        200:
+          description: 
+          schema:
+            $ref: #TODO CAPEC Response schema
+        404:
+          description: CAPECs at current version not found
+        429:
+          description: Too many requests within given time window
+  /v1/cwe/:
+    get:
+      summary: Get one, or some CWEs
+      operationId: getCWE
+      parameters: 
+        - in: query
+          name: id
+          description: CWE ID to get
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: plaintext
+          description: set to any non null value to get plaintextified strings
+            where there is HTML in the raw data set
+          required: false 
+          schema:
+            type: string
+          default: false
+        # - in: query
+        #   name: search
+        #   description: Generic search
+        #   required: false
+        #   schema:
+        #     type: object
+        # - in: query
+        #   name: filter 
+        #   description: Top level elements to include in response
+        #   required: false
+        #   schema:
+        #     type: array
+
+      description: |
+        This API endpoint returns a given set of CWEs by identifier
+      responses:
+        200:
+          description: success
+          schema:
+            $ref: #TODO CWE Response schema
+        404:
+          description: CWE ID not found
+  /v1/CAPEC/:
+    get:
+      summary: Get one, or some CAPECs
+      operationId: getCAPEC
+      parameters: 
+        - in: query
+          name: id
+          description: CAPEC ID to get
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: plaintext
+          description: set to any non null value to get plaintextified strings
+            where there is HTML in the raw data set
+          required: false 
+          schema:
+            type: string
+        # - in: query
+        #   name: search
+        #   description: Generic search
+        #   required: false
+        #   schema:
+        #     type: object
+        # - in: query
+        #   name: filter 
+        #   description: Top level elements to include in response
+        #   required: false
+        #   schema:
+        #     type: array
+
+      description: |
+        This API endpoint returns a given set of CAPECs by identifier
+      responses:
+        200:
+          description: success
+          schema:
+            $ref: #TODO CWE Response schema
+        404:
+          description: CAPEC ID not found
+  /v1/cwe/descendants/:
+    get:
+      summary: Get all descendants of a specified weakness, sampling by the view
+      operationId: getDescendants
+      parameters: 
+        - in: query
+          name: view
+          description: View variable is the View_ID field to follow in the
+            Has_Member entries and ChildOf relationships
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: id
+          description: The id refers to the cwe to grab the children/members/descendants  
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: success
+          schema:
+            $ref: # TODO
+  /v1/cwe/enum/:
+    get:
+      summary: Get enumeration of all possible values for a specific field in CWE
+      operationId: getSchemaEnum
+      parameters:
+        - in: query
+          name: element
+          description: the first level element to query about valid response
+            values for, if not specified return the entire schema
+          required: false
+          type: string
+      responses:
+        200:
+          description: The subset of the schema object that is just the requested element
+          schema:
+            $ref: https://json-schema.org/draft/2020-12/output/schema
+        404:
+          description: element not found
+  /v1/cwe/meta/:
+    get:
+      summary: Get meta data for CWE version including release data
+      operationId: getMetadata
+      parameters:
+        - in: query
+          name: version
+          description: CWE version to get meta data for
+          required: true
+          type: string
+      responses:
+        200:
+          description: The subset of the schema object that is just the requested element
+          schema:
+            $ref: #TODO
+        404:
+          description: Version not found
+  /v1/capec/enum/:
+    get:
+      summary: Get enumeration of all possible values for a specific field in CAPEC
+      operationId: getSchemaEnum
+      parameters:
+        - in: query
+          name: element
+          description: the first level element to query about valid response
+            values for, if not specified return the entire schema
+          required: false
+          type: string
+      responses:
+        200:
+          description: The subset of the schema object that is just the requested element
+          schema:
+            $ref: https://json-schema.org/draft/2020-12/output/schema
+        404:
+          description: element not found
+  /v1/capec/meta/:
+    get:
+      summary: Get meta data for CAPEC version including release data
+      operationId: getMetadata
+      parameters:
+        - in: query
+          name: version
+          description: CAPEC version to get meta data for
+          required: true
+          type: string
+      responses:
+        200:
+          description: The subset of the schema object that is just the requested element
+          schema:
+            $ref: #TODO
+        404:
+          description: Version not found
+
+
+
