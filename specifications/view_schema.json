@@ -1,0 +1,220 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/output/schema",
+  "type": "object",
+  "properties": {
+    "Content_Type": {
+      "type": "string",
+      "enum": ["View"]
+    },
+    "ID": {
+      "type": "string"
+    },
+    "Name": {
+      "type": "string"
+    },
+    "Type": {
+      "type": "string"
+    },
+    "Status": {
+      "type": "string"
+    },
+    "Objective": {
+      "type": "string"
+    },
+    "Audience": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Type": {
+                "type": "string"
+              },
+              "Description": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "Type"
+            ]
+          }
+        }
+      ]
+    },
+    "Members": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "CWE_ID": {
+                "type": "string"
+              },
+              "View_ID": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "CWE_ID",
+              "View_ID"
+            ]
+          }
+        }
+      ]
+    },
+    "References": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "External_Reference_ID": {
+                "type": "string"
+              },
+              "Authors": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "Title": {
+                "type": "string"
+              },
+              "Publication_Year": {
+                "type": "string"
+              },
+              "Publication_Month": {
+                "type": "string"
+              },
+              "Publication_Day": {
+                "type": "string"
+              },
+              "URL": {
+                "type": "string"
+              },
+              "Edition": {
+                "type": "string"
+              },
+              "Publisher": {
+                "type": "string"
+              },
+              "Section": {
+                "type": "string"
+              },
+              "Publication": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "External_Reference_ID",
+              "Title"
+            ]
+          }
+        }
+      ]
+    },
+    "Notes": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Type": {
+                "type": "string"
+              },
+              "Note": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "Note",
+              "Type"
+            ]
+          }
+        }
+      ]
+    },
+    "Content_History": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Submission_Name": {
+            "type": "string"
+          },
+          "Submission_Organization": {
+            "type": "string"
+          },
+          "Submission_Date": {
+            "type": "string"
+          },
+          "Modification_Name": {
+            "type": "string"
+          },
+          "Modification_Organization": {
+            "type": "string"
+          },
+          "Modification_Date": {
+            "type": "string"
+          },
+          "Modification_Comment": {
+            "type": "string"
+          },
+          "Modification_Importance": {
+            "type": "string"
+          },
+          "Date": {
+            "type": "string"
+          },
+          "Previous_Entry_Name": {
+            "type": "string"
+          },
+          "Type": {
+            "type": "string"
+          },
+          "Contribution_Name": {
+            "type": "string"
+          },
+          "Contribution_Date": {
+            "type": "string"
+          },
+          "Contribution_Comment": {
+            "type": "string"
+          },
+          "Submission_Comment": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "Audience",
+    "Content_History",
+    "Content_Type",
+    "ID",
+    "Members",
+    "Name",
+    "Notes",
+    "Objective",
+    "References",
+    "Status",
+    "Type"
+  ]
+}

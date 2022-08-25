@@ -8,17 +8,30 @@
     "Name": {
       "type": "string"
     },
+    "Content_Type": {
+      "type": "string",
+      "enum": [ "Weakness" ]
+    },
     "Abstraction": {
       "type": "string",
-      "enum": [ "Pillar", "Class", "Base", "Variant", "Compound"]
+      "enum": [
+        "Pillar",
+        "Class",
+        "Base",
+        "Variant",
+        "Compound"
+      ]
     },
     "Structure": {
       "type": "string",
-      "enum": [ "Chain", "Composite", "Simple"]
+      "enum": [
+        "Chain",
+        "Composite",
+        "Simple"
+      ]
     },
     "Status": {
-      "type": "string",
-      "enum": [ "Deprecated", "Draft", "Incomplete", "Obsolete", "Stable", "Usable"]
+      "type": "string"
     },
     "Description": {
       "type": "string"
@@ -34,7 +47,13 @@
         "null",
         "string"
       ],
-      "enum": [null, "High", "Medium", "Low", "Unknown"]
+      "enum": [
+        null,
+        "High",
+        "Medium",
+        "Low",
+        "Unknown"
+      ]
     },
     "Related_Weaknesses": {
       "anyOf": [
@@ -48,7 +67,17 @@
             "properties": {
               "Nature": {
                 "type": "string",
-                "enum": [ "ChildOf", "ParentOf", "StartsWith", "CanFollow", "CanPrecede", "RequiredBy", "Requires", "CanAlsoBe", "PeerOf"]
+                "enum": [
+                  "ChildOf",
+                  "ParentOf",
+                  "StartsWith",
+                  "CanFollow",
+                  "CanPrecede",
+                  "RequiredBy",
+                  "Requires",
+                  "CanAlsoBe",
+                  "PeerOf"
+                ]
               },
               "CWE_ID": {
                 "type": "string"
@@ -58,7 +87,9 @@
               },
               "Ordinal": {
                 "type": "string",
-                "enum": ["Primary"]
+                "enum": [
+                  "Primary"
+                ]
               },
               "Chain_ID": {
                 "type": "string"
@@ -68,7 +99,7 @@
               "CWE_ID",
               "Nature",
               "View_ID"
-            ] 
+            ]
           }
         }
       ]
@@ -85,7 +116,11 @@
             "properties": {
               "Ordinality": {
                 "type": "string",
-                "enum": [ "Indirect", "Primary", "Resultant"]
+                "enum": [
+                  "Indirect",
+                  "Primary",
+                  "Resultant"
+                ]
               },
               "Description": {
                 "type": "string"
@@ -110,7 +145,12 @@
             "properties": {
               "Type": {
                 "type": "string",
-                "enum": ["Language", "Operating_System","Architecture","Technology"]
+                "enum": [
+                  "Language",
+                  "Operating_System",
+                  "Architecture",
+                  "Technology"
+                ]
               },
               "Class": {
                 "type": "string"
@@ -179,7 +219,24 @@
             "properties": {
               "Phase": {
                 "type": "string",
-                "enum": [ "Policy", "Requirements", "Architecture and Design", "Implementation", "Build and Compilation", "Testing", "Documentation", "Bundling", "Distribution", "Installation", "System Configuration", "Operation", "Patching and Maintenance", "Porting", "Integration", "Manufacturing"]
+                "enum": [
+                  "Policy",
+                  "Requirements",
+                  "Architecture and Design",
+                  "Implementation",
+                  "Build and Compilation",
+                  "Testing",
+                  "Documentation",
+                  "Bundling",
+                  "Distribution",
+                  "Installation",
+                  "System Configuration",
+                  "Operation",
+                  "Patching and Maintenance",
+                  "Porting",
+                  "Integration",
+                  "Manufacturing"
+                ]
               },
               "Note": {
                 "type": "string"
@@ -204,18 +261,58 @@
             "properties": {
               "Scope": {
                 "type": "string",
-                "enum": [ "Confidentiality", "Integrity", "Availability", "Access Control", "Accountability", "Authentication", "Authorization", "Non-Repudiation", "Other"]
+                "enum": [
+                  "Confidentiality",
+                  "Integrity",
+                  "Availability",
+                  "Access Control",
+                  "Accountability",
+                  "Authentication",
+                  "Authorization",
+                  "Non-Repudiation",
+                  "Other"
+                ]
               },
               "Impact": {
                 "type": "string",
-                "enum": [ "Modify Memory", "Read Memory", "Modify Files or Directories", "Read Files or Directories", "Modify Application Data", "Read Application Data", "DoS: Crash, Exit, or Restart", "DoS: Amplification", "DoS: Instability", "DoS: Resource Consumption (CPU)", "DoS: Resource Consumption (Memory)", "DoS: Resource Consumption (Other)", "Execute Unauthorized Code or Commands", "Gain Privileges or Assume Identity", "Bypass Protection Mechanism", "Hide Activities", "Alter Execution Logic", "Quality Degradation", "Unexpected State", "Varies by Context", "Reduce Maintainability", "Reduce Performance", "Reduce Reliability", "Other"]
+                "enum": [
+                  "Modify Memory",
+                  "Read Memory",
+                  "Modify Files or Directories",
+                  "Read Files or Directories",
+                  "Modify Application Data",
+                  "Read Application Data",
+                  "DoS: Crash, Exit, or Restart",
+                  "DoS: Amplification",
+                  "DoS: Instability",
+                  "DoS: Resource Consumption (CPU)",
+                  "DoS: Resource Consumption (Memory)",
+                  "DoS: Resource Consumption (Other)",
+                  "Execute Unauthorized Code or Commands",
+                  "Gain Privileges or Assume Identity",
+                  "Bypass Protection Mechanism",
+                  "Hide Activities",
+                  "Alter Execution Logic",
+                  "Quality Degradation",
+                  "Unexpected State",
+                  "Varies by Context",
+                  "Reduce Maintainability",
+                  "Reduce Performance",
+                  "Reduce Reliability",
+                  "Other"
+                ]
               },
               "Note": {
                 "type": "string"
               },
               "Likelihood": {
                 "type": "string",
-                "enum": ["High", "Medium", "Low", "Unknown"]
+                "enum": [
+                  "High",
+                  "Medium",
+                  "Low",
+                  "Unknown"
+                ]
               }
             },
             "required": [
@@ -237,14 +334,41 @@
             "properties": {
               "Method": {
                 "type": "string",
-                "enum": [ "Automated Analysis", "Automated Dynamic Analysis", "Automated Static Analysis", "Automated Static Analysis - Source Code", "Automated Static Analysis - Binary or Bytecode", "Fuzzing", "Manual Analysis", "Manual Dynamic Analysis", "Manual Static Analysis", "Manual Static Analysis - Source Code", "Manual Static Analysis - Binary or Bytecode", "White Box", "Black Box", "Architecture or Design Review", "Dynamic Analysis with Manual Results Interpretation", "Dynamic Analysis with Automated Results Interpretation", "Formal Verification", "Simulation / Emulation", "Other"]
+                "enum": [
+                  "Automated Analysis",
+                  "Automated Dynamic Analysis",
+                  "Automated Static Analysis",
+                  "Automated Static Analysis - Source Code",
+                  "Automated Static Analysis - Binary or Bytecode",
+                  "Fuzzing",
+                  "Manual Analysis",
+                  "Manual Dynamic Analysis",
+                  "Manual Static Analysis",
+                  "Manual Static Analysis - Source Code",
+                  "Manual Static Analysis - Binary or Bytecode",
+                  "White Box",
+                  "Black Box",
+                  "Architecture or Design Review",
+                  "Dynamic Analysis with Manual Results Interpretation",
+                  "Dynamic Analysis with Automated Results Interpretation",
+                  "Formal Verification",
+                  "Simulation / Emulation",
+                  "Other"
+                ]
               },
               "Description": {
                 "type": "string"
               },
               "Effectiveness": {
                 "type": "string",
-                "enum": [ "High", "Moderate", "SOAR Partial", "Opportunistic", "Limited", "None"]
+                "enum": [
+                  "High",
+                  "Moderate",
+                  "SOAR Partial",
+                  "Opportunistic",
+                  "Limited",
+                  "None"
+                ]
               },
               "Detection_Method_ID": {
                 "type": "string"
@@ -273,7 +397,24 @@
             "properties": {
               "Phase": {
                 "type": "string",
-                "enum": [ "Policy", "Requirements", "Architecture and Design", "Implementation", "Build and Compilation", "Testing", "Documentation", "Bundling", "Distribution", "Installation", "System Configuration", "Operation", "Patching and Maintenance", "Porting", "Integration", "Manufacturing"]
+                "enum": [
+                  "Policy",
+                  "Requirements",
+                  "Architecture and Design",
+                  "Implementation",
+                  "Build and Compilation",
+                  "Testing",
+                  "Documentation",
+                  "Bundling",
+                  "Distribution",
+                  "Installation",
+                  "System Configuration",
+                  "Operation",
+                  "Patching and Maintenance",
+                  "Porting",
+                  "Integration",
+                  "Manufacturing"
+                ]
               },
               "Description": {
                 "type": "string"
@@ -283,11 +424,34 @@
               },
               "Strategy": {
                 "type": "string",
-                "enum": [ "Attack Surface Reduction", "Compilation or Build Hardening", "Enforcement by Conversion", "Environment Hardening", "Firewall", "Input Validation", "Language Selection", "Libraries or Frameworks", "Resource Limitation", "Output Encoding", "Parameterization", "Refactoring", "Sandbox or Jail", "Separation of Privilege"]
+                "enum": [
+                  "Attack Surface Reduction",
+                  "Compilation or Build Hardening",
+                  "Enforcement by Conversion",
+                  "Environment Hardening",
+                  "Firewall",
+                  "Input Validation",
+                  "Language Selection",
+                  "Libraries or Frameworks",
+                  "Resource Limitation",
+                  "Output Encoding",
+                  "Parameterization",
+                  "Refactoring",
+                  "Sandbox or Jail",
+                  "Separation of Privilege"
+                ]
               },
               "Effectiveness": {
                 "type": "string",
-                "enum": [ "High", "Moderate", "Limited", "Incidental", "Discouraged Common Practice", "Defense in Depth", "None"]
+                "enum": [
+                  "High",
+                  "Moderate",
+                  "Limited",
+                  "Incidental",
+                  "Discouraged Common Practice",
+                  "Defense in Depth",
+                  "None"
+                ]
               },
               "Effectiveness_Notes": {
                 "type": "string"
@@ -318,11 +482,49 @@
                 },
                 "Nature": {
                   "type": "string",
-                  "enum": [ "attack", "bad", "good", "informative", "mitigation", "result"]
+                  "enum": [
+                    "attack",
+                    "bad",
+                    "good",
+                    "informative",
+                    "mitigation",
+                    "result"
+                  ]
                 },
                 "Language": {
                   "type": "string",
-                  "enum": [ "Ada", "ASP", "ASP.NET", "Basic", "C", "C++", "C#", "COBOL", "Fortran", "F#", "Go", "HTML", "Java", "JavaScript", "JSP", "Objective-C", "Pascal", "Perl", "PHP", "Python", "Ruby", "Rust", "Shell", "SQL", "Swift", "VB.NET", "Verilog", "VHDL", "XML", "Other"]
+                  "enum": [
+                    "Ada",
+                    "ASP",
+                    "ASP.NET",
+                    "Basic",
+                    "C",
+                    "C++",
+                    "C#",
+                    "COBOL",
+                    "Fortran",
+                    "F#",
+                    "Go",
+                    "HTML",
+                    "Java",
+                    "JavaScript",
+                    "JSP",
+                    "Objective-C",
+                    "Pascal",
+                    "Perl",
+                    "PHP",
+                    "Python",
+                    "Ruby",
+                    "Rust",
+                    "Shell",
+                    "SQL",
+                    "Swift",
+                    "VB.NET",
+                    "Verilog",
+                    "VHDL",
+                    "XML",
+                    "Other"
+                  ]
                 },
                 "Body_Text": {
                   "type": "string"
@@ -380,7 +582,28 @@
           "type": "array",
           "items": {
             "type": "string",
-            "enum": [ "Authentication", "Authorization", "Code Libraries", "Counters", "Cryptography", "Error Handling", "Interprocess Communication", "File Processing", "Logging", "Memory Management", "Networking", "Number Processing", "Program Invocation", "Protection Mechanism", "Session Management", "Signals", "String Processing", "Functional-Area-Independent", "Power", "Clock"]
+            "enum": [
+              "Authentication",
+              "Authorization",
+              "Code Libraries",
+              "Counters",
+              "Cryptography",
+              "Error Handling",
+              "Interprocess Communication",
+              "File Processing",
+              "Logging",
+              "Memory Management",
+              "Networking",
+              "Number Processing",
+              "Program Invocation",
+              "Protection Mechanism",
+              "Session Management",
+              "Signals",
+              "String Processing",
+              "Functional-Area-Independent",
+              "Power",
+              "Clock"
+            ]
           }
         }
       ]
@@ -394,7 +617,13 @@
           "type": "array",
           "items": {
             "type": "string",
-            "enum": [ "CPU", "File or Directory", "Memory", "System Process", "Other"]
+            "enum": [
+              "CPU",
+              "File or Directory",
+              "Memory",
+              "System Process",
+              "Other"
+            ]
           }
         }
       ]
@@ -411,7 +640,34 @@
             "properties": {
               "Taxonomy_Name": {
                 "type": "string",
-                "enum": [ "7 Pernicious Kingdoms", "19 Deadly Sins", "Aslam", "Bishop", "CLASP", "Landwehr", "OMG ASCSM", "OMG ASCRM", "OMG ASCMM", "OMG ASCPEM", "OWASP Top Ten 2004", "OWASP Top Ten 2007", "OWASP Top Ten", "PLOVER", "Protection Analysis", "RISOS", "Weber, Karger, Paradkar", "WASC", "CERT C Secure Coding", "CERT C++ Secure Coding", "The CERT Oracle Secure Coding Standard for Java (2011)", "SEI CERT C Coding Standard", "SEI CERT C++ Coding Standard", "SEI CERT Oracle Coding Standard for Java", "SEI CERT Perl Coding Standard", "Software Fault Patterns"]
+                "enum": [
+                  "7 Pernicious Kingdoms",
+                  "19 Deadly Sins",
+                  "Aslam",
+                  "Bishop",
+                  "CLASP",
+                  "Landwehr",
+                  "OMG ASCSM",
+                  "OMG ASCRM",
+                  "OMG ASCMM",
+                  "OMG ASCPEM",
+                  "OWASP Top Ten 2004",
+                  "OWASP Top Ten 2007",
+                  "OWASP Top Ten",
+                  "PLOVER",
+                  "Protection Analysis",
+                  "RISOS",
+                  "Weber, Karger, Paradkar",
+                  "WASC",
+                  "CERT C Secure Coding",
+                  "CERT C++ Secure Coding",
+                  "The CERT Oracle Secure Coding Standard for Java (2011)",
+                  "SEI CERT C Coding Standard",
+                  "SEI CERT C++ Coding Standard",
+                  "SEI CERT Oracle Coding Standard for Java",
+                  "SEI CERT Perl Coding Standard",
+                  "Software Fault Patterns"
+                ]
               },
               "Entry_ID": {
                 "type": "string"
@@ -421,7 +677,13 @@
               },
               "Mapping_Fit": {
                 "type": "string",
-                "enum": [ "Exact", "CWE More Abstract", "CWE More Specific", "Imprecise", "Perspective"]
+                "enum": [
+                  "Exact",
+                  "CWE More Abstract",
+                  "CWE More Specific",
+                  "Imprecise",
+                  "Perspective"
+                ]
               }
             },
             "required": [
@@ -514,7 +776,15 @@
             "properties": {
               "Type": {
                 "type": "string",
-                "enum": [ "Applicable Platform", "Maintenance", "Relationship", "Research Gap", "Terminology", "Theoretical", "Other"]
+                "enum": [
+                  "Applicable Platform",
+                  "Maintenance",
+                  "Relationship",
+                  "Research Gap",
+                  "Terminology",
+                  "Theoretical",
+                  "Other"
+                ]
               },
               "Note": {
                 "type": "string"
@@ -565,7 +835,10 @@
           },
           "Type": {
             "type": "string",
-            "enum": [ "Content", "Feedback"]
+            "enum": [
+              "Content",
+              "Feedback"
+            ]
           },
           "Contribution_Name": {
             "type": "string"
@@ -581,7 +854,10 @@
           },
           "Modification_Importance": {
             "type": "string",
-            "enum": [ "Normal", "Critical"]
+            "enum": [
+              "Normal",
+              "Critical"
+            ]
           }
         }
       }
@@ -595,6 +871,7 @@
     "Background_Details",
     "Common_Consequences",
     "Content_History",
+    "Content_Type",
     "Demonstrative_Examples",
     "Description",
     "Detection_Methods",

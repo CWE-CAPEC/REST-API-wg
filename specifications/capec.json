@@ -1,0 +1,575 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/output/schema",
+  "type": "object",
+  "properties": {
+    "Type": {
+      "type": "string"
+    },
+    "ID": {
+      "type": "integer"
+    },
+    "Name": {
+      "type": "string"
+    },
+    "Abstraction": {
+      "type": "string"
+    },
+    "Status": {
+      "type": "string"
+    },
+    "Description": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "Extended_Description": {
+      "anyOf": [
+        {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "Alternate_Terms": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Term": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "Term"
+            ]
+          }
+        }
+      ]
+    },
+    "Likelihood_Of_Attack": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Typical_Severity": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Related_Attack_Patterns": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Related_Attack_Pattern": {
+                "type": "object",
+                "properties": {
+                  "Nature": {
+                    "type": "string"
+                  },
+                  "CAPEC_ID": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "CAPEC_ID",
+                  "Nature"
+                ]
+              }
+            },
+            "required": [
+              "Related_Attack_Pattern"
+            ]
+          }
+        }
+      ]
+    },
+    "Execution_Flow": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Step": {
+                "type": "integer"
+              },
+              "Phase": {
+                "type": "string"
+              },
+              "Description": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                ]
+              },
+              "Techniques": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "Description",
+              "Phase",
+              "Step",
+              "Techniques"
+            ]
+          }
+        }
+      ]
+    },
+    "Prerequisites": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "Skills_Required": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Level": {
+                "type": "string"
+              },
+              "Skill": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "Level",
+              "Skill"
+            ]
+          }
+        }
+      ]
+    },
+    "Resources_Required": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "Indicators": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "Consequences": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Scope": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "Impact": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "Impact",
+              "Scope"
+            ]
+          }
+        }
+      ]
+    },
+    "Mitigations": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "Example_Instances": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "Related_Weaknesses": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        }
+      ]
+    },
+    "Taxonomy_Mappings": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Taxonomy_Name": {
+                "type": "string"
+              },
+              "Entry_ID": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "Entry_Name": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "Entry_ID",
+              "Entry_Name",
+              "Taxonomy_Name"
+            ]
+          }
+        }
+      ]
+    },
+    "References": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "External_Reference": {
+                "anyOf": [
+                  {
+                    "type": "null"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "External_Reference_ID": {
+                        "type": "string"
+                      },
+                      "Authors": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "Title": {
+                        "type": "string"
+                      },
+                      "Edition": {
+                        "type": [
+                          "null",
+                          "string"
+                        ]
+                      },
+                      "Publication": {
+                        "type": [
+                          "null",
+                          "string"
+                        ]
+                      },
+                      "Publication_Year": {
+                        "type": [
+                          "null",
+                          "string"
+                        ]
+                      },
+                      "Publication_Month": {
+                        "type": [
+                          "null",
+                          "string"
+                        ]
+                      },
+                      "Publication_Day": {
+                        "type": [
+                          "null",
+                          "string"
+                        ]
+                      },
+                      "Publisher": {
+                        "type": [
+                          "null",
+                          "string"
+                        ]
+                      },
+                      "URL": {
+                        "type": [
+                          "null",
+                          "string"
+                        ]
+                      },
+                      "URL_Date": {
+                        "type": [
+                          "null",
+                          "string"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "Authors",
+                      "Edition",
+                      "External_Reference_ID",
+                      "Publication",
+                      "Publication_Day",
+                      "Publication_Month",
+                      "Publication_Year",
+                      "Publisher",
+                      "Title",
+                      "URL",
+                      "URL_Date"
+                    ]
+                  }
+                ]
+              },
+              "Section": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              }
+            },
+            "required": [
+              "External_Reference",
+              "Section"
+            ]
+          }
+        }
+      ]
+    },
+    "Notes": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Type": {
+                "type": "string"
+              },
+              "Notes": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                ]
+              }
+            },
+            "required": [
+              "Notes",
+              "Type"
+            ]
+          }
+        }
+      ]
+    },
+    "Content_History": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Submission_Name": {
+            "type": "string"
+          },
+          "Submission_Organization": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "Submission_Date": {
+            "type": "string"
+          },
+          "Modification_Name": {
+            "type": "string"
+          },
+          "Modification_Organization": {
+            "type": "string"
+          },
+          "Modification_Date": {
+            "type": "string"
+          },
+          "Modification_Comment": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Properties": {
+      "type": "object",
+      "properties": {
+        "ID": {
+          "type": "integer"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "Type": {
+          "type": "string"
+        },
+        "Status": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "ID",
+        "Name",
+        "Status"
+      ]
+    },
+    "Objective": {
+      "type": "string"
+    },
+    "Members": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "CAPEC_ID": {
+                "type": "integer"
+              }
+            },
+            "required": [
+              "CAPEC_ID"
+            ]
+          }
+        }
+      ]
+    },
+    "Summary": {
+      "type": "string"
+    },
+    "Relationships": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "CAPEC_ID": {
+                "type": "integer"
+              }
+            },
+            "required": [
+              "CAPEC_ID"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

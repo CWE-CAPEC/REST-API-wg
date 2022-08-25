@@ -4,8 +4,10 @@ info:
   version: "0.1"
   title: "CWE-CAPEC API 0.1"
   description: |
-    The CWE-CAPEC API specification defines the RESTful semantics for querying the
-    CWE and CAPEC data sets from MITRE hosted servers.
+    The CWE-CAPEC API specification defines the RESTful semantics for querying
+    the CWE and CAPEC data sets from MITRE hosted servers. The goals of this
+    API are to provide access to the RAW CWE dataset in JSON form, and to
+    perform common search, and filter queries
   termsOfService: "TODO"
   contact:
     name: "CWE-CAPEC team"
