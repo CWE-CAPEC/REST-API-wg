@@ -10,7 +10,9 @@
     },
     "Content_Type": {
       "type": "string",
-      "enum": [ "Weakness" ]
+      "enum": [
+        "Weakness"
+      ]
     },
     "Abstraction": {
       "type": "string",
@@ -144,19 +146,19 @@
             "type": "object",
             "properties": {
               "Type": {
-                "type": "string",
-                "enum": [
-                  "Language",
-                  "Operating_System",
-                  "Architecture",
-                  "Technology"
-                ]
+                "type": "string"
               },
               "Class": {
                 "type": "string"
               },
               "Prevalence": {
-                "type": "string"
+                "type": "string",
+                "enum": [
+                  "Often",
+                  "Sometimes",
+                  "Rarely",
+                  "Undetermined"
+                ]
               },
               "Name": {
                 "type": "string"
@@ -260,47 +262,53 @@
             "type": "object",
             "properties": {
               "Scope": {
-                "type": "string",
-                "enum": [
-                  "Confidentiality",
-                  "Integrity",
-                  "Availability",
-                  "Access Control",
-                  "Accountability",
-                  "Authentication",
-                  "Authorization",
-                  "Non-Repudiation",
-                  "Other"
-                ]
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "Confidentiality",
+                    "Integrity",
+                    "Availability",
+                    "Access Control",
+                    "Accountability",
+                    "Authentication",
+                    "Authorization",
+                    "Non-Repudiation",
+                    "Other"
+                  ]
+                }
               },
               "Impact": {
-                "type": "string",
-                "enum": [
-                  "Modify Memory",
-                  "Read Memory",
-                  "Modify Files or Directories",
-                  "Read Files or Directories",
-                  "Modify Application Data",
-                  "Read Application Data",
-                  "DoS: Crash, Exit, or Restart",
-                  "DoS: Amplification",
-                  "DoS: Instability",
-                  "DoS: Resource Consumption (CPU)",
-                  "DoS: Resource Consumption (Memory)",
-                  "DoS: Resource Consumption (Other)",
-                  "Execute Unauthorized Code or Commands",
-                  "Gain Privileges or Assume Identity",
-                  "Bypass Protection Mechanism",
-                  "Hide Activities",
-                  "Alter Execution Logic",
-                  "Quality Degradation",
-                  "Unexpected State",
-                  "Varies by Context",
-                  "Reduce Maintainability",
-                  "Reduce Performance",
-                  "Reduce Reliability",
-                  "Other"
-                ]
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "Modify Memory",
+                    "Read Memory",
+                    "Modify Files or Directories",
+                    "Read Files or Directories",
+                    "Modify Application Data",
+                    "Read Application Data",
+                    "DoS: Crash, Exit, or Restart",
+                    "DoS: Amplification",
+                    "DoS: Instability",
+                    "DoS: Resource Consumption (CPU)",
+                    "DoS: Resource Consumption (Memory)",
+                    "DoS: Resource Consumption (Other)",
+                    "Execute Unauthorized Code or Commands",
+                    "Gain Privileges or Assume Identity",
+                    "Bypass Protection Mechanism",
+                    "Hide Activities",
+                    "Alter Execution Logic",
+                    "Quality Degradation",
+                    "Unexpected State",
+                    "Varies by Context",
+                    "Reduce Maintainability",
+                    "Reduce Performance",
+                    "Reduce Reliability",
+                    "Other"
+                  ]
+                }
               },
               "Note": {
                 "type": "string"
@@ -316,6 +324,7 @@
               }
             },
             "required": [
+              "Impact",
               "Scope"
             ]
           }
@@ -396,25 +405,28 @@
             "type": "object",
             "properties": {
               "Phase": {
-                "type": "string",
-                "enum": [
-                  "Policy",
-                  "Requirements",
-                  "Architecture and Design",
-                  "Implementation",
-                  "Build and Compilation",
-                  "Testing",
-                  "Documentation",
-                  "Bundling",
-                  "Distribution",
-                  "Installation",
-                  "System Configuration",
-                  "Operation",
-                  "Patching and Maintenance",
-                  "Porting",
-                  "Integration",
-                  "Manufacturing"
-                ]
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "Policy",
+                    "Requirements",
+                    "Architecture and Design",
+                    "Implementation",
+                    "Build and Compilation",
+                    "Testing",
+                    "Documentation",
+                    "Bundling",
+                    "Distribution",
+                    "Installation",
+                    "System Configuration",
+                    "Operation",
+                    "Patching and Maintenance",
+                    "Porting",
+                    "Integration",
+                    "Manufacturing"
+                  ]
+                }
               },
               "Description": {
                 "type": "string"
@@ -458,7 +470,8 @@
               }
             },
             "required": [
-              "Description"
+              "Description",
+              "Phase"
             ]
           }
         }
@@ -530,7 +543,44 @@
                   "type": "string"
                 },
                 "References": {
-                  "type": "string"
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "External_Reference_ID": {
+                        "type": "string"
+                      },
+                      "Authors": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "Title": {
+                        "type": "string"
+                      },
+                      "Publication_Year": {
+                        "type": "string"
+                      },
+                      "Publication_Month": {
+                        "type": "string"
+                      },
+                      "Publisher": {
+                        "type": "string"
+                      },
+                      "URL": {
+                        "type": "string"
+                      },
+                      "Publication_Day": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "External_Reference_ID",
+                      "Title",
+                      "URL"
+                    ]
+                  }
                 }
               }
             }
@@ -803,6 +853,9 @@
       "items": {
         "type": "object",
         "properties": {
+          "Type": {
+            "type": "string"
+          },
           "Submission_Name": {
             "type": "string"
           },
@@ -833,12 +886,8 @@
           "Submission_Comment": {
             "type": "string"
           },
-          "Type": {
-            "type": "string",
-            "enum": [
-              "Content",
-              "Feedback"
-            ]
+          "Contribution_Type": {
+            "type": "string"
           },
           "Contribution_Name": {
             "type": "string"
@@ -859,7 +908,10 @@
               "Critical"
             ]
           }
-        }
+        },
+        "required": [
+          "Type"
+        ]
       }
     }
   },
