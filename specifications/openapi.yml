@@ -22,7 +22,7 @@ tags:
   # TODO
 
 paths:
-  /v1/:
+  /v1/: #TODO return just schema and DB versions not full openapi spec
     get:
       summary: |
         Reports supported CWE content and schema versions, with
@@ -33,7 +33,27 @@ paths:
         200:
           description: Server API endpoint and version enumeration
           schema:
-            $ref: # TODO
+            type: object
+            properties:
+              releases:
+                type: array
+                items: 
+                  type: object
+                  properties:
+                    version:
+                      type: string
+                    date:
+                      type: string
+              schemas:
+                type: array
+                items: 
+                  type: object
+                  properties:
+                    version:
+                      type: string
+                    date:
+                      type: string
+
         404:
           description: No server information available
         429:
