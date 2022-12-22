@@ -1,374 +1,341 @@
-# Forked from https://github.com/ThreatDataScience/taxii2-openapi/blob/master/swagger.yaml
-openapi: '3.0.3'
+openapi: 3.0.3
 info:
-  version: "0.1"
-  title: "CWE-CAPEC API 0.1"
+  contact:
+    email: cwe@mitre.org
+    name: CWE-CAPEC team
+    url: https://github.com/CWE-CAPEC/REST-API-wg
   description: |
-    The CWE-CAPEC API specification defines the RESTful semantics for querying
-    the CWE and CAPEC data sets from MITRE hosted servers. The goals of this
+    The CWE-CAPEC API specification defines the RESTful semantics for querying the
+    CWE and CAPEC data sets from MITRE hosted servers. The goals of this
     API are to provide access to the RAW CWE dataset in JSON form, and to
     perform common search, and filter queries
-  termsOfService: "TODO"
-  contact:
-    name: "CWE-CAPEC team"
-    url: "https://github.com/CWE-CAPEC/REST-API-wg"
-    email: 
-      - "cwe@mitre.org"
-      - "capec@mitre.org"
   license:
     name: MIT
     url: http://opensource.org/licenses/MIT
-tags: 
-  # TODO
-
+  termsOfService: TODO
+  title: CWE-CAPEC API 0.1
+  version: "0.1"
+servers:
+- url: /
 paths:
-  /v1/: #TODO return just schema and DB versions not full openapi spec
+  /v1/:
     get:
+      operationId: getSupportedInfo
+      responses:
+        "200":
+          description: Server API endpoint and version enumeration
+        "404":
+          description: No server information available
       summary: |
         Reports supported CWE content and schema versions, with
         their associated response schema version. Includes release
         dates and a list of API endpoints
-      operationId: getSupportedInfo
-      responses:
-        200:
-          description: Server API endpoint and version enumeration
-          schema:
-            type: object
-            properties:
-              releases:
-                type: array
-                items: 
-                  type: object
-                  properties:
-                    version:
-                      type: string
-                    date:
-                      type: string
-              schemas:
-                type: array
-                items: 
-                  type: object
-                  properties:
-                    version:
-                      type: string
-                    date:
-                      type: string
-
-        404:
-          description: No server information available
-        429:
-          description: Too many requests within given time
   /v1/cwe/all/:
     get:
-      summary: Get all CWEs
-      operationId: getAllCWE
       description: |
         This API endpoint returns all CWE weakness objects
-      parameters:
-        - in: query
-          name: version
-          description: CWE version to query into - defaults to current
-          required: false 
-          type: string
-        - in: query
-          name: plaintext
-          description: set to any non null value to get plaintextified strings
-            where there is HTML in the raw data set
-          required: false 
-          schema:
-            type: string
-          default: false
-        - in: query
-          name: filter 
-          description: Top level elements to include in response
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-        - in: query
-          name: search
-          description: Generic search for fields matching or containing particular values
-          required: false
-          schema:
-            type: object
+      operationId: getAllCWE
       responses:
-        200:
-          description: 
-          schema:
-            type: array
-            items:
-              oneOf:
-                - $ref: 'https://raw.githubusercontent.com/CWE-CAPEC/REST-API-wg/main/specifications/weakness.json'
-                - $ref: 'https://raw.githubusercontent.com/CWE-CAPEC/REST-API-wg/main/specifications/view_schema.json'
-                - $ref: 'https://raw.githubusercontent.com/CWE-CAPEC/REST-API-wg/main/specifications/category_schema.json'
-        404:
-          description: CWEs at current version not able to be found
-        429:
+        "200":
+          description: success
+        "204":
+          description: good search, but no elements found
+        "404":
+          description: CWEs at current version not found
+        "429":
           description: Too many requests within given time
+        "500":
+          description: Internal server error
+      summary: Get all CWE Weaknesses
   /v1/capec/all/:
     get:
-      summary: Get all CAPECs
-      operationId: getAllCAPEC
       description: |
         This API endpoint returns all CAPECs
-      parameters:
-        - in: query
-          name: version
-          description: CWE version to get meta data for
-          required: true
-          type: string
+      operationId: getAllCAPEC
       responses:
-        200:
-          description: 
-          schema:
-            $ref: #TODO CAPEC Response schema
-        404:
-          description: CAPECs at current version not found
-        429:
-          description: Too many requests within given time window
-  /v1/cwe/:
-    get:
-      summary: Get one, or some CWEs
-      operationId: getCWE
-      parameters: 
-        - in: query
-          name: id
-          description: CWE ID to get
-          required: true
-          schema:
-            type: array
-            items:
-              type: string
-        - in: query
-          name: version
-          description: CWE version to query into - defaults to current
-          required: false 
-          type: string
-        - in: query
-          name: plaintext
-          description: set to any non null value to get plaintextified strings
-            where there is HTML in the raw data set
-          required: false 
-          schema:
-            type: string
-          default: false
-        - in: query
-          name: filter 
-          description: Top level elements to include in response
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-        - in: query
-          name: search
-          description: Generic search for fields matching or containing particular values
-          required: false
-          schema:
-            type: object
-
-      description: |
-        This API endpoint returns a given set of CWEs which may be filtered
-        down by a list of id's, and may have their response JSON content
-        filtered by key
-      responses:
-        200:
+        "200":
           description: success
-          schema:
-            type: array
-            items:
-              oneOf:
-                - $ref: 'https://raw.githubusercontent.com/CWE-CAPEC/REST-API-wg/main/specifications/weakness.json'
-                - $ref: 'https://raw.githubusercontent.com/CWE-CAPEC/REST-API-wg/main/specifications/view_schema.json'
-                - $ref: 'https://raw.githubusercontent.com/CWE-CAPEC/REST-API-wg/main/specifications/category_schema.json'
-        404:
-          description: CWE IDs not found, or other query error.
-            Search&filter queries which are correctly formed but imply an empty
-            response will not error.
-        429:
-          description: Too many requests within given time
-  /v1/CAPEC/:
+        "204":
+          description: good search, but no elements found
+        "404":
+          description: CAPECs at current version not found
+        "429":
+          description: Too many requests within given time window
+        "500":
+          description: Internal server error
+      summary: Get all CAPECs
+  /v1/cwew/:
     get:
-      summary: Get one, or some CAPECs
-      operationId: getCAPEC
-      parameters: 
-        - in: query
-          name: id
-          description: CAPEC ID to get
-          required: true
-          schema:
-            type: array
-            items:
-              type: string
-        - in: query
-          name: plaintext
-          description: set to any non null value to get plaintextified strings
-            where there is HTML in the raw data set
-          required: false 
-          schema:
+      description: |
+        This API endpoint returns a given set of CWE weaknesses by identifier
+      operationId: getCWEW
+      parameters:
+      - description: CWE ID to get
+        explode: true
+        in: query
+        name: id
+        required: true
+        schema:
+          items:
             type: string
-        # - in: query
-        #   name: search
-        #   description: Generic search
-        #   required: false
-        #   schema:
-        #     type: object
-        # - in: query
-        #   name: filter 
-        #   description: Top level elements to include in response
-        #   required: false
-        #   schema:
-        #     type: array
-
+          type: array
+        style: form
+      - description: set to any non null value to get plaintextified strings where
+          there is HTML in the raw data set
+        explode: true
+        in: query
+        name: plaintext
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          description: success
+        "404":
+          description: CWE ID not found
+        "500":
+          description: Internal server error
+      summary: "Get one, or some CWE weaknesses"
+  /v1/cwev/:
+    get:
+      description: |
+        This API endpoint returns a given set of CWE views by identifier
+      operationId: getCWEV
+      parameters:
+      - description: CWE ID to get
+        explode: true
+        in: query
+        name: id
+        required: true
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: set to any non null value to get plaintextified strings where
+          there is HTML in the raw data set
+        explode: true
+        in: query
+        name: plaintext
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          description: success
+        "404":
+          description: CWE ID not found
+        "500":
+          description: Internal server error
+      summary: "Get one, or some CWE views"
+  /v1/cwec/:
+    get:
+      description: |
+        This API endpoint returns a given set of CWE categories by identifier
+      operationId: getCWEC
+      parameters:
+      - description: CWE ID to get
+        explode: true
+        in: query
+        name: id
+        required: true
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: set to any non null value to get plaintextified strings where
+          there is HTML in the raw data set
+        explode: true
+        in: query
+        name: plaintext
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          description: success
+        "404":
+          description: CWE ID not found
+        "500":
+          description: Internal server error
+      summary: "Get one, or some CWE categories"
+  /v1/capec/:
+    get:
       description: |
         This API endpoint returns a given set of CAPECs by identifier
+      operationId: getCAPEC
+      parameters:
+      - description: CAPEC ID to get
+        explode: true
+        in: query
+        name: id
+        required: true
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: set to any non null value to get plaintextified strings where
+          there is HTML in the raw data set
+        explode: true
+        in: query
+        name: plaintext
+        required: false
+        schema:
+          type: string
+        style: form
       responses:
-        200:
+        "200":
           description: success
-          schema:
-            $ref: #TODO CWE Response schema
-        404:
+        "404":
           description: CAPEC ID not found
-        429:
-          description: Too many requests within given time
+        "500":
+          description: Internal server error
+      summary: "Get one, or some CAPECs"
   /v1/cwe/descendants/:
     get:
-      summary: Get all descendants of a specified weakness, sampling by the view
-      description: Request children of a particular object ID, including
-        categories and views.
-      operationId: getCWEDescendants
-      parameters: 
-        - in: query
-          name: version
-          description: CWE version to query into - defaults to current
-          required: false 
+      operationId: getDescendants
+      parameters:
+      - description: View variable is the View_ID field to follow in the Has_Member
+          entries and ChildOf relationships
+        explode: true
+        in: query
+        name: view
+        required: true
+        schema:
           type: string
-        - in: query
-          name: view
-          description: View variable is the View_ID field to follow in the
-            Has_Member entries and ChildOf relationships. The variable is
-            required, because walking the CWE data set by Relationship without
-            a View_ID results in a non-tree structure
-          required: true
-          schema:
-            type: string
-        - in: query
-          name: id
-          description: The id refers to the cwe to grab the children/members/descendants  
-          required: true
-          schema:
-            type: string
+        style: form
+      - description: The id refers to the cwe to grab the children/members/descendants
+        explode: true
+        in: query
+        name: id
+        required: true
+        schema:
+          type: string
+        style: form
       responses:
-        200:
+        "200":
           description: success
-          schema:
-            type: array
-            items:
-              oneOf:
-                - $ref: 'https://raw.githubusercontent.com/CWE-CAPEC/REST-API-wg/main/specifications/weakness.json'
-                - $ref: 'https://raw.githubusercontent.com/CWE-CAPEC/REST-API-wg/main/specifications/view_schema.json'
-                - $ref: 'https://raw.githubusercontent.com/CWE-CAPEC/REST-API-wg/main/specifications/category_schema.json'
-        404:
-          description: Error unable to find decendenants for ID
+      summary: "Get all descendants of a specified weakness, sampling by the view"
+  /v1/cwe/parent/:
+    get:
+      operationId: getParent
+      parameters:
+      - description: View variable is the View_ID field to follow in the Has_Member
+          entries and ChildOf relationships to determine the appropriate
+          parent. If there is none the reponse will be empty
+        explode: true
+        in: query
+        name: view
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: The id refers to the cwe to grab the parent of
+        explode: true
+        in: query
+        name: id
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          description: success
+        "404":
+          description: CWE ID not found
+        "500":
+          description: Internal server error
+      summary: "Get the parent of a specified weakness, sampling by the view"
   /v1/cwe/enum/:
     get:
-      summary: Get enumeration of all possible values for a specific field in CWE
       operationId: getCWESchemaEnum
       parameters:
-        - in: query
-          name: element
-          description: the first level element to query about valid response
-            values for, if not specified return the entire schema
-          required: false
+      - description: "the first level element to query about valid response values\
+          \ for, if not specified return the entire schema"
+        explode: true
+        in: query
+        name: element
+        required: false
+        schema:
           type: string
+        style: form
       responses:
-        200:
-          description: The subset of the schema object that is just the requested element
-          schema:
-            $ref: https://json-schema.org/draft/2020-12/output/schema
-        404:
+        "200":
+          description: The subset of the schema object that is just the requested
+            element
+        "404":
           description: element not found
-        429:
-          description: Too many requests within given time
+        "500":
+          description: Internal server error
+      summary: Get enumeration of all possible values for a specific field in CWE
   /v1/cwe/meta/:
     get:
-      summary: Get meta data for CWE version including release data
       operationId: getCWEMetadata
       parameters:
-        - in: query
-          name: version
-          description: CWE version to get meta data for
-          required: true
+      - description: CWE version to get meta data for
+        explode: true
+        in: query
+        name: version
+        required: true
+        schema:
           type: string
+        style: form
       responses:
-        200:
-          description: The subset of the schema object that is just the requested element
-          schema:
-            type: object
-            properties:
-              releaseDate: string
-              version: string
-              schemaVersion: string
-        404:
+        "200":
+          description: The subset of the schema object that is just the requested
+            element
+        "404":
           description: Version not found
-        429:
-          description: Too many requests within given time
-  /v1/cwe/changes/:
-    get:
-      summary: Get list of changes between two dates or versions
-      operationId: getCWEChanges
-      parameters:
-        - in: query
-          name: element
-          description: the first level element to query about valid response
-            values for, if not specified return the entire schema
-          required: false
-          type: string
-      responses:
-        200:
-          description: The subset of the schema object that is just the requested element
-          schema:
-            $ref: #TODO Decide 09082022
-        404:
-          description: element not found
-        429:
-          description: Too many requests within given time
+        "500":
+          description: Internal server error
+      summary: Get meta data for CWE version including release data
   /v1/capec/enum/:
     get:
-      summary: Get enumeration of all possible values for a specific field in CAPEC
       operationId: getCAPECSchemaEnum
       parameters:
-        - in: query
-          name: element
-          description: the first level element to query about valid response
-            values for, if not specified return the entire schema
-          required: false
+      - description: "the first level element to query about valid response values\
+          \ for, if not specified return the entire schema"
+        explode: true
+        in: query
+        name: element
+        required: false
+        schema:
           type: string
+        style: form
       responses:
-        200:
-          description: The subset of the schema object that is just the requested element
-          schema:
-            $ref: https://json-schema.org/draft/2020-12/output/schema
-        404:
+        "200":
+          description: The subset of the schema object that is just the requested
+            element
+        "404":
           description: element not found
+        "500":
+          description: Internal server error
+      summary: Get enumeration of all possible values for a specific field in CAPEC
   /v1/capec/meta/:
     get:
-      summary: Get meta data for CAPEC version including release data
       operationId: getCAPECMetadata
       parameters:
-        - in: query
-          name: version
-          description: CAPEC version to get meta data for
-          required: true
+      - description: CAPEC version to get meta data for
+        explode: true
+        in: query
+        name: version
+        required: true
+        schema:
           type: string
+        style: form
       responses:
-        200:
-          description: The subset of the schema object that is just the requested element
-          schema:
-            $ref: #TODO
-        404:
+        "200":
+          description: The subset of the schema object that is just the requested
+            element
+        "404":
           description: Version not found
-
-
-
+        "500":
+          description: Internal server error
+      summary: Get meta data for CAPEC version including release data
+components:
+  schemas: {}
