@@ -79,7 +79,7 @@ paths:
       tags: [CWE]
       description: >
         This API endpoint returns a given set of CWE weaknesses by identifier.
-        If no identifier is given, all CWE weaknesses are returned.
+        If the id provided is "all", all CWE weaknesses are returned.
       operationId: getCWEWeakness
       parameters:
         - description: CWE Weakness ID(s)
@@ -114,7 +114,7 @@ paths:
       tags: [CWE]
       description: >+
         This API endpoint returns a given set of CWE categories by identifier.
-        If no identifier is given, all CWE categories are returned.
+        If the id provided is "all", all CWE categories are returned.
 
       operationId: getCWECategory
       parameters:
@@ -149,8 +149,8 @@ paths:
     get:
       tags: [CWE]
       description: >
-        This API endpoint returns a given set of CWE views by identifier. If no
-        identifier is given, all CWE views are returned.
+        This API endpoint returns a given set of CWE views by identifier. 
+        If the id is "all", all CWE views are returned.
       operationId: getCWEView
       parameters:
         - description: CWE View ID(s)
