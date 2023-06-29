@@ -46,7 +46,10 @@ paths:
     get:
       tags: [CWE]
       description: >
-        This API endpoint returns metadata on specified CWE IDs.  If no id is specified, this endpoint returns all CWE metadata.
+        This API endpoint returns metadata on specified CWE IDs.  
+        If all is passed for the id, this endpoint returns all CWE metadata. 
+        Multiple id's can be passed with commas seperating them to
+        return an array of cwe metadata
       operationId: getCWEInfo
       parameters:
         - description: ''
@@ -79,7 +82,9 @@ paths:
       tags: [CWE]
       description: >
         This API endpoint returns a given set of CWE weaknesses by identifier.
-        If the id provided is "all", all CWE weaknesses are returned.
+        If the id provided is "all", all CWE weaknesses are returned. Multiple id's can
+        be specified if they are comma seperated
+
       operationId: getCWEWeakness
       parameters:
         - description: CWE Weakness ID(s)
@@ -114,7 +119,8 @@ paths:
       tags: [CWE]
       description: >+
         This API endpoint returns a given set of CWE categories by identifier.
-        If the id provided is "all", all CWE categories are returned.
+        If the id provided is "all", all CWE categories are returned. Multiple 
+        id's can be specified if they are comma seperated
 
       operationId: getCWECategory
       parameters:
@@ -150,7 +156,8 @@ paths:
       tags: [CWE]
       description: >
         This API endpoint returns a given set of CWE views by identifier. 
-        If the id is "all", all CWE views are returned.
+        If the id is "all", all CWE views are returned. Multiple id's can
+        be specified if they are comma seperated
       operationId: getCWEView
       parameters:
         - description: CWE View ID(s)
