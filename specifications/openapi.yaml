@@ -46,8 +46,7 @@ paths:
     get:
       tags: [CWE]
       description: >
-        This API endpoint returns metadata on specified CWE IDs.  
-        If all is passed for the id, this endpoint returns all CWE metadata. 
+        This API endpoint returns metadata on specified CWE IDs. 
         Multiple id's can be passed with commas seperating them to
         return an array of cwe metadata
       operationId: getCWEInfo
