@@ -14,7 +14,7 @@ You are invited to join this effort and become a member of the Working Group per
 
 The group meets on a biweekly basis on Thursday mornings at 9am ET. The Working Group will provide development and design support and deliver artifacts that can be used by MITRE to craft the required infrastructure to support the RESTful API. At the end of this process, the Working Group will provide deliver a document and any other collateral that can be used by MITRE to craft the required infrastructure to support the RESTful API.
 
-Please contact a.cron@ieee.org or lmalinowski@mitre.org if you are interested in actively participating in this effort.
+Please contact a.cron@ieee.org if you are interested in actively participating in this effort.
 
 Best regards,
 
