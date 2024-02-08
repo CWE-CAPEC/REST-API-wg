@@ -34,8 +34,7 @@ paths:
           content:
             application/json:
               schema:
-                description: CWE Content Version
-                type: number
+                $ref: '#/components/schemas/CWEVersion'
           description: success
         '404':
           description: CWE version not found
@@ -46,9 +45,7 @@ paths:
     get:
       tags: [CWE]
       description: >
-        This API endpoint returns metadata on specified CWE IDs. 
-        Multiple id's can be passed with commas seperating them to
-        return an array of cwe metadata
+        This API endpoint returns metadata on specified CWE IDs.
       operationId: getCWEInfo
       parameters:
         - description: ''
@@ -81,9 +78,7 @@ paths:
       tags: [CWE]
       description: >
         This API endpoint returns a given set of CWE weaknesses by identifier.
-        If the id provided is "all", all CWE weaknesses are returned. Multiple id's can
-        be specified if they are comma seperated
-
+        Multiple identifiers are separated by a comma. If the keyword "all" is given, all CWE weaknesses are returned.
       operationId: getCWEWeakness
       parameters:
         - description: CWE Weakness ID(s)
@@ -118,8 +113,7 @@ paths:
       tags: [CWE]
       description: >+
         This API endpoint returns a given set of CWE categories by identifier.
-        If the id provided is "all", all CWE categories are returned. Multiple 
-        id's can be specified if they are comma seperated
+        Multiple identifiers are separated by a comma. If keyword "all" is given, all CWE categories are returned.
 
       operationId: getCWECategory
       parameters:
@@ -155,8 +149,7 @@ paths:
       tags: [CWE]
       description: >
         This API endpoint returns a given set of CWE views by identifier. 
-        If the id is "all", all CWE views are returned. Multiple id's can
-        be specified if they are comma seperated
+        Multiple identifiers are separated by a comma. If keyword "all" is given, all CWE views are returned.
       operationId: getCWEView
       parameters:
         - description: CWE View ID(s)
@@ -198,7 +191,7 @@ paths:
             explode: true
             in: query
             name: view
-            required: true
+            required: false
             schema:
               type: string
             style: form
@@ -235,7 +228,7 @@ paths:
           explode: true
           in: query
           name: view
-          required: true
+          required: false
           schema:
             type: string
           style: form
@@ -263,6 +256,31 @@ paths:
       summary: All descendants of a specified weakness, sampling by the view
 components:
   schemas:
+    CWEVersion:
+      type: object
+      properties:
+        ContentVersion:
+          description: CWE Content Version
+          type: string
+          format: integer
+        ContentDate:
+          description: Release Date of CWE Content Version
+          type: string
+        TotalWeaknesses:
+          description: Total count of Weaknesses in this release
+          type: integer
+        TotalCategories:
+          description: Total count of Categories in this release
+          type: integer
+        TotalViews:
+          description: Total count of Views in this release
+          type: integer
+      example:
+          ContentVersion: "4.12"
+          ContentDate: "2023-06-29"
+          TotalWeaknesses: 958
+          TotalCategories: 409
+          TotalViews: 53
     CWEInfo:
       type: array
       items:
@@ -372,6 +390,8 @@ components:
           - "23"
         References:
           $ref: '#/components/schemas/References'
+        MappingNotes:
+          $ref: '#/components/schemas/MappingNotes'
         Notes:
           $ref: '#/components/schemas/Notes'
         ContentHistory:
@@ -640,6 +660,33 @@ components:
         required:
           - Description
           - Method
+    MappingNotes:
+      type: object
+      items:
+        type: object
+        additionalProperties: false
+        properties:
+          Usage:
+            type: string
+            example: allowed
+          Rationale:
+            type: string
+            example: A brief explanation on mapping rationale
+          Comments:
+            type: string
+            example: Comments on the mapping
+          Reasons:
+            type: array
+            items:
+              type: string
+            example: 
+              - Acceptable-Use
+              - Other
+          Suggestions:
+            type: string
+            example: High
+        required:
+          - Description
     Mitigations:
       type: array
       items:
