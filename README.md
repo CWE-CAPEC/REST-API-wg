@@ -1,7 +1,7 @@
-CWE REST API Working Group
+### CWE REST API Working Group
 
-Co-Chair: Adam Cron (Synopsys)
-Co-chair: Rich Piazza (MITRE)
+- Co-Chair: Adam Cron (Synopsys)
+- Co-chair: Rich Piazza (MITRE)
 
 The CWE™ Program – operated by the CISA-funded Homeland Security Systems Engineering and
 Development Institute (HSSEDI) – is pleased to offer the CWE REST API, a community-driven effort driven
