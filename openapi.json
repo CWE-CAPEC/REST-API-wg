@@ -150,7 +150,7 @@
             "name": "id(s)",
             "required": true,
             "schema": {
-                "type": "string"
+              "type": "string"
             },
             "style": "simple"
           }
@@ -414,19 +414,18 @@
             },
             "style": "simple"
           },
-        {
-          "description": "Limit ancestors to include only primary parents",
-          "explode": false, 
-          "in": "query", 
-          "name": "primary",
-          "required": false,
-          "schema": {
-            "type": "boolean"
-          },
-          "allowEmptyValue": true,
-          "style": "form"
-
-        }
+          {
+            "description": "Limit ancestors to include only primary parents",
+            "explode": false,
+            "in": "query",
+            "name": "primary",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            },
+            "allowEmptyValue": true,
+            "style": "form"
+          }
         ],
         "responses": {
           "200": {
@@ -460,59 +459,73 @@
         "items": {
           "type": "array",
           "additionalProperties": false,
-          "properties": {
-            "Data": {
-              "$ref": "#/components/schemas/Node"
-            },
-            "Parents": {
-              "type": "array",
-              "items": { "$ref": "#/components/schemas/Ancestors" }
+          "items": {
+            "type": "object",
+            "properties": {
+              "Data": {
+                "$ref": "#/components/schemas/Node"
+              },
+              "Parents": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Ancestors"
+                }
+              }
             }
           }
         },
-        "example": 
-          {
-            "Data":{"Type":"class_weakness","ID":"74","ViewID":"1000"},
-            "Parents":[
-              {
-                "Data":{"Type":"pillar_weakness","ID":"707","ViewID":"1000"},
-                "Parents":[
-                  {
-                    "Data":{"Type":"view","ID":"1000","ViewID":"1000"},
-                    "Parents":null
-                  }
-                ]
-              }
-            ]
-          }
+        "example": {
+          "Data": {
+            "Type": "class_weakness",
+            "ID": "74",
+            "ViewID": "1000"
+          },
+          "Parents": [
+            {
+              "Data": {
+                "Type": "pillar_weakness",
+                "ID": "707",
+                "ViewID": "1000"
+              },
+              "Parents": [
+                {
+                  "Data": {
+                    "Type": "view",
+                    "ID": "1000",
+                    "ViewID": "1000"
+                  },
+                  "Parents": null
+                }
+              ]
+            }
+          ]
+        }
       },
       "Children": {
         "type": "object",
         "properties": {
           "Type": {
             "type": "string",
-            "format": "integer"              
+            "format": "integer"
           },
           "ID": {
             "type": "string",
             "format": "integer"
           },
-          "ViewID":{
+          "ViewID": {
             "type": "string",
             "format": "integer"
-          
           }
         },
         "required": [
           "ID",
           "Type"
         ],
-        "example": 
-          {
-            "Type": "base_weakness",
-            "ID": "91",
-            "ViewID": "1003"
-          }
+        "example": {
+          "Type": "base_weakness",
+          "ID": "91",
+          "ViewID": "1003"
+        }
       },
       "CWEVersion": {
         "type": "object",
@@ -540,11 +553,11 @@
           }
         },
         "example": {
-          "ContentVersion": "4.12",
-          "ContentDate": "2023-06-29",
-          "TotalWeaknesses": 958,
+          "ContentVersion": "4.15",
+          "ContentDate": "2024-07-16 ",
+          "TotalWeaknesses": 959,
           "TotalCategories": 409,
-          "TotalViews": 53
+          "TotalViews": 54
         }
       },
       "CWEInfo": {
@@ -561,7 +574,7 @@
               "description": "Type of CWE object",
               "type": "string",
               "enum": [
-	              "category",
+                "category",
                 "view",
                 "pillar_weakness",
                 "base_weakness",
@@ -591,81 +604,86 @@
         ]
       },
       "Node": {
-            "type": "object",
-            "properties": {
-              "Type": {
-                "type": "string"
-              },
-              "ID": {
-                "type": "string", 
-                "format": "integer"
-              },
-              "ViewID": {
-                "type": "string", 
-                "format": "integer"
-              },
-              "Primary_Parent": {
-                "type": "boolean"
-              }
-            },
-            "required": [
-              "Type",
-              "ID",
-              "ViewID"
-            ]
+        "type": "object",
+        "properties": {
+          "Type": {
+            "type": "string"
           },
+          "ID": {
+            "type": "string",
+            "format": "integer"
+          },
+          "ViewID": {
+            "type": "string",
+            "format": "integer"
+          },
+          "Primary_Parent": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "Type",
+          "ID",
+          "ViewID"
+        ]
+      },
       "Descendants": {
         "type": "array",
         "items": {
           "type": "array",
           "additionalProperties": false,
-          "properties": {
-            "Data": {
-              "$ref": "#/components/schemas/Node"
-            },
-            "Children": {
-              "type": "array",
-              "items": { "$ref": "#/components/schemas/Descendants" }
+          "items": {
+            "type": "object",
+            "properties": {
+              "Data": {
+                "$ref": "#/components/schemas/Node"
+              },
+              "Children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Descendants"
+                }
+              }
             }
           }
         },
         "example": {
           "Data": {
-            "Type":"class_weakness",
-            "ID":"671",
-            "ViewID":"1000"
+            "Type": "class_weakness",
+            "ID": "671",
+            "ViewID": "1000"
           },
-          "Children":[
+          "Children": [
             {
-              "Data":{
-                "Type":"base_weakness",
-                "ID":"447",
-                "ViewID":"1000"
+              "Data": {
+                "Type": "base_weakness",
+                "ID": "447",
+                "ViewID": "1000"
               },
-              "Children":null
+              "Children": null
             },
             {
               "Data": {
-                  "Type":"base_weakness",
-                  "ID":"798",
-                  "ViewID":"1000"
+                "Type": "base_weakness",
+                "ID": "798",
+                "ViewID": "1000"
               },
-              "Children":[
+              "Children": [
                 {
-                  "Data":{
-                    "Type":"variant_weakness",
-                    "ID":"259",
-                    "ViewID":"1000"
+                  "Data": {
+                    "Type": "variant_weakness",
+                    "ID": "259",
+                    "ViewID": "1000"
                   },
-                  "Children":null
+                  "Children": null
                 },
                 {
-                  "Data":{
-                    "Type":"variant_weakness",
-                    "ID":"321",
-                    "ViewID":"1000"
+                  "Data": {
+                    "Type": "variant_weakness",
+                    "ID": "321",
+                    "ViewID": "1000"
                   },
-                  "Children":null
+                  "Children": null
                 }
               ]
             }
@@ -683,24 +701,23 @@
             "type": "string",
             "format": "integer"
           },
-          "ViewID":{
+          "ViewID": {
             "type": "string",
             "format": "integer"
           },
           "Primary_Parent": {
-              "type": "boolean"
-            }
+            "type": "boolean"
+          }
         },
         "required": [
           "ID",
           "Type"
         ],
-        "example": 
-          {
-            "Type": "base_weakness",
-            "ID": "91",
-            "ViewID": "1003"
-          }
+        "example": {
+          "Type": "base_weakness",
+          "ID": "91",
+          "ViewID": "1003"
+        }
       },
       "Weakness": {
         "type": "object",
@@ -1335,7 +1352,6 @@
           ]
         }
       },
-
       "References": {
         "type": "array",
         "items": {
