@@ -458,7 +458,7 @@
         "type": "array",
         "items": {
           "type": "array",
-          "additionalProperties": false,
+          
           "items": {
             "type": "object",
             "properties": {
@@ -470,7 +470,7 @@
                 "items": {
                   "$ref": "#/components/schemas/Ancestors"
                 }
-              }
+	      }
             }
           }
         },
@@ -631,7 +631,6 @@
         "type": "array",
         "items": {
           "type": "array",
-          "additionalProperties": false,
           "items": {
             "type": "object",
             "properties": {
@@ -1084,7 +1083,10 @@
               "type": "string",
               "format": "date"
             }
-          }
+          },
+          "required": [
+              "Type"
+          ]
         },
         "example": [
           {
@@ -1104,9 +1106,6 @@
             "PreviousEntryName": "Old name",
             "Date": "2000-01-04"
           }
-        ],
-        "required": [
-          "Type"
         ]
       },
       "DemonstrativeExamples": {
@@ -1240,7 +1239,10 @@
           }
         },
         "required": [
-          "Description"
+            "Usage",
+	    "Rationale",
+	    "Comments",
+	    "Reasons"
         ]
       },
       "Mitigations": {
