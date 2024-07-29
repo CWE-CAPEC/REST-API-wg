@@ -1,5 +1,11 @@
 ## Quick Start Instructions for CWE REST API Users
 
+The Common Weakness Enumeration is a list of SW and HW weaknesses that can lead to vulnerabilities and support cyber attacks. For a full description of CWE consult https://cwe.mitre.org/about/index.html.
+
+The CWE REST API provides access to CWE content by security SW and HW architects, EDA tool developers, verification engineers who are concerned about mitigating security risks in their products; and the databases themselves.
+
+As the CWE content changes only several times a year when a new release is available, we suggest using the API to populate a cache of the CWE content locally, which can be refreshed when there is a new release.  
+
 The API is available without any need to register or use any credentials.
 
 The URL to access the API is: https://cwe-api.mitre.org/api/v1/cwe/
