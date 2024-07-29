@@ -4,7 +4,7 @@ The Common Weakness Enumeration is a list of SW and HW weaknesses that can lead 
 
 The CWE REST API provides access to CWE content by security SW and HW architects, EDA tool developers, verification engineers who are concerned about mitigating security risks in their products; and the databases themselves.
 
-As the CWE content changes only several times a year when a new release is available, we suggest using the API to populate a cache of the CWE content locally, which can be refreshed when there is a new release.  
+As the CWE content changes only several times a year when there is a new release, we suggest using the API to populate a cache of the CWE content locally, which can be refreshed when the new release becomes available.  
 
 The API is available without any need to register or use any credentials.
 
