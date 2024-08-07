@@ -14,7 +14,7 @@ The available endpoints are:
 
 ![endpoints](endpoints.png)
 
-To view detailed documentation of the endpoints, use the [Swagger editor](https://editor.swagger.io). Download the file [openapi.json](openapi.json) and then import it into the Swagger editor using **File>Import file**
+To view detailed documentation of the endpoints, use the [Swagger editor](https://editor.swagger.io). Download the file [openapi.json](openapi.json) to your local device and then import it into the Swagger editor using **File>Import file**
 
 Note that a request for the children, parents, descendants or ancestors of an existing CWE will return an empty list, [], and a status of 200 if none exist.  However, requesting a CWE id that does not exist from one of those endpoints will return a status of 404.
 
