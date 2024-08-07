@@ -14,7 +14,7 @@ The available endpoints are:
 
 ![endpoints](endpoints.png)
 
-To view detailed documentation of the endpoints, use the [Swagger editor](https://editor.swagger.io) and import the file [openapi.json](openapi.json)
+To view detailed documentation of the endpoints, use the [Swagger editor](https://editor.swagger.io). Download the file [openapi.json](openapi.json) and then import it into the Swagger editor using **File>Import file**
 
 Note that a request for the children, parents, descendants or ancestors of an existing CWE will return an empty list, [], and a status of 200 if none exist.  However, requesting a CWE id that does not exist from one of those endpoints will return a status of 404.
 
@@ -22,7 +22,7 @@ Additionally, using an endpoint for the wrong type of CWE (e.g., using the weakn
  
 Here are examples of each endpoint to try:
 
-Note: examples use the full URL
+**Note: examples use the full URL**
  
 - https://cwe-api.mitre.org/api/v1/cwe/version
 - https://cwe-api.mitre.org/api/v1/cwe/74,79
