@@ -8,9 +8,7 @@ As the CWE content changes only several times a year when there is a new release
 
 The API is available without any need to register or use any credentials.
 
-The URL to access the API is: https://cwe-api.mitre.org/api/v1/cwe/
-
-The available endpoints are:
+The root URL to access the API is: https<nolink>://cwe-api.mitre.org/api/v1/.  It must be appending with one of these available endpoints:
 
 ![endpoints](endpoints.png)
 
