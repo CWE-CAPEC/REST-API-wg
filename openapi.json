@@ -1269,7 +1269,9 @@
               },
               "Suggestions": {
                   "type": "array",
-                  "#ref": "#/components/schema/SuggestionComment"
+                  "items": {
+                    "$ref": "#/components/schemas/SuggestionComment"
+                  }
               }
             },
             "required": [
@@ -1591,11 +1593,11 @@
                 }
               }
             }
-          },
-          "responses": {
-            "InternalServerError": {
-              "description": "An Internal Server Error occurred"
-            }
+          }
+        },
+        "responses": {
+          "InternalServerError": {
+            "description": "An Internal Server Error occurred"
           }
         }
       }
