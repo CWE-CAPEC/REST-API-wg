@@ -170,7 +170,8 @@
                     "Categories": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/Category"                     }
+                        "$ref": "#/components/schemas/Category"
+                      }
                     }
                   }
                 }
@@ -218,7 +219,7 @@
                     "Views": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/View"                     
+                        "$ref": "#/components/schemas/View"
                       }
                     }
                   }
@@ -443,7 +444,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                    "$ref": "#/components/schemas/Ancestors"
+                  "$ref": "#/components/schemas/Ancestors"
                 }
               }
             },
@@ -463,1142 +464,1142 @@
   "components": {
     "schemas": {
       "Ancestors": {
-            "type": "object",
-            "properties": {
+        "type": "object",
+        "properties": {
+          "Data": {
+            "$ref": "#/components/schemas/Node"
+          },
+          "Parents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Ancestors"
+            }
+          }
+        },
+        "example": {
+          "Data": {
+            "Type": "class_weakness",
+            "ID": "74",
+            "ViewID": "1000"
+          },
+          "Parents": [
+            {
               "Data": {
-                "$ref": "#/components/schemas/Node"
-              },
-              "Parents": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/Ancestors"
-                }
-	            }
-            },
-            "example": {
-              "Data": {
-                "Type": "class_weakness",
-                "ID": "74",
+                "Type": "pillar_weakness",
+                "ID": "707",
                 "ViewID": "1000"
               },
               "Parents": [
                 {
                   "Data": {
-                    "Type": "pillar_weakness",
-                    "ID": "707",
+                    "Type": "view",
+                    "ID": "1000",
                     "ViewID": "1000"
                   },
-                  "Parents": [
-                    {
-                      "Data": {
-                        "Type": "view",
-                        "ID": "1000",
-                        "ViewID": "1000"
-                      },
-                      "Parents": null
-                    }
-                  ]
+                  "Parents": null
                 }
               ]
             }
+          ]
+        }
+      },
+      "Children": {
+        "type": "object",
+        "properties": {
+          "Type": {
+            "type": "string",
+            "format": "integer"
+          },
+          "ID": {
+            "type": "string",
+            "format": "integer"
+          },
+          "ViewID": {
+            "type": "string",
+            "format": "integer"
+          }
+        },
+        "required": [
+          "ID",
+          "Type"
+        ],
+        "example": {
+          "Type": "base_weakness",
+          "ID": "91",
+          "ViewID": "1003"
+        }
+      },
+      "CWEVersion": {
+        "type": "object",
+        "properties": {
+          "ContentVersion": {
+            "description": "CWE Content Version",
+            "type": "string",
+            "format": "integer"
+          },
+          "ContentDate": {
+            "description": "Release Date of CWE Content Version",
+            "type": "string"
+          },
+          "TotalWeaknesses": {
+            "description": "Total count of Weaknesses in this release",
+            "type": "integer"
+          },
+          "TotalCategories": {
+            "description": "Total count of Categories in this release",
+            "type": "integer"
+          },
+          "TotalViews": {
+            "description": "Total count of Views in this release",
+            "type": "integer"
+          }
+        },
+        "example": {
+          "ContentVersion": "4.15",
+          "ContentDate": "2024-07-16 ",
+          "TotalWeaknesses": 959,
+          "TotalCategories": 409,
+          "TotalViews": 54
+        }
+      },
+      "CWEInfo": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "ID": {
+              "description": "CWE ID",
+              "type": "string",
+              "format": "integer"
+            },
+            "Type": {
+              "description": "Type of CWE object",
+              "type": "string",
+              "enum": [
+                "category",
+                "view",
+                "pillar_weakness",
+                "base_weakness",
+                "variant_weakness",
+                "chain_weakness",
+                "class_weakness",
+                "compound_weakness",
+                "deprecated_weakness",
+                "deprecated_category",
+                "deprecated_view"
+              ]
+            }
+          },
+          "required": [
+            "ID",
+            "Type"
+          ]
+        },
+        "example": [
+          {
+            "ID": "79",
+            "type": "base_weakness"
+          },
+          {
+            "id": "1000",
+            "type": "view"
+          }
+        ]
+      },
+      "Node": {
+        "type": "object",
+        "properties": {
+          "Type": {
+            "type": "string"
+          },
+          "ID": {
+            "type": "string",
+            "format": "integer"
+          },
+          "ViewID": {
+            "type": "string",
+            "format": "integer"
+          },
+          "Primary_Parent": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "Type",
+          "ID",
+          "ViewID"
+        ]
+      },
+      "Descendants": {
+        "type": "object",
+        "properties": {
+          "Data": {
+            "$ref": "#/components/schemas/Node"
           },
           "Children": {
-            "type": "object",
-            "properties": {
-              "Type": {
-                "type": "string",
-                "format": "integer"
-              },
-              "ID": {
-                "type": "string",
-                "format": "integer"
-              },
-              "ViewID": {
-                "type": "string",
-                "format": "integer"
-              }
-            },
-            "required": [
-              "ID",
-              "Type"
-            ],
-            "example": {
-              "Type": "base_weakness",
-              "ID": "91",
-              "ViewID": "1003"
-            }
-          },
-          "CWEVersion": {
-            "type": "object",
-            "properties": {
-              "ContentVersion": {
-                "description": "CWE Content Version",
-                "type": "string",
-                "format": "integer"
-              },
-              "ContentDate": {
-                "description": "Release Date of CWE Content Version",
-                "type": "string"
-              },
-              "TotalWeaknesses": {
-                "description": "Total count of Weaknesses in this release",
-                "type": "integer"
-              },
-              "TotalCategories": {
-                "description": "Total count of Categories in this release",
-                "type": "integer"
-              },
-              "TotalViews": {
-                "description": "Total count of Views in this release",
-                "type": "integer"
-              }
-            },
-            "example": {
-              "ContentVersion": "4.15",
-              "ContentDate": "2024-07-16 ",
-              "TotalWeaknesses": 959,
-              "TotalCategories": 409,
-              "TotalViews": 54
-            }
-          },
-          "CWEInfo": {
             "type": "array",
             "items": {
-              "type": "object",
-              "properties": {
-                "ID": {
-                  "description": "CWE ID",
-                  "type": "string",
-                  "format": "integer"
-                },
-                "Type": {
-                  "description": "Type of CWE object",
-                  "type": "string",
-                  "enum": [
-                    "category",
-                    "view",
-                    "pillar_weakness",
-                    "base_weakness",
-                    "variant_weakness",
-                    "chain_weakness",
-                    "class_weakness",
-                    "compound_weakness",
-                    "deprecated_weakness",
-                    "deprecated_category",
-                    "deprecated_view"
-                  ]
-                }
-              },
-              "required": [
-                "ID",
-                "Type"
-              ]
-            },
-            "example": [
-              {
-                "ID": "79",
-                "type": "base_weakness"
-              },
-              {
-                "id": "1000",
-                "type": "view"
-              }
-            ]
+              "$ref": "#/components/schemas/Descendants"
+            }
+          }
+        },
+        "example": {
+          "Data": {
+            "Type": "class_weakness",
+            "ID": "671",
+            "ViewID": "1000"
           },
-          "Node": {
-            "type": "object",
-            "properties": {
-              "Type": {
-                "type": "string"
-              },
-              "ID": {
-                "type": "string",
-                "format": "integer"
-              },
-              "ViewID": {
-                "type": "string",
-                "format": "integer"
-              },
-              "Primary_Parent": {
-                "type": "boolean"
-              }
-            },
-            "required": [
-              "Type",
-              "ID",
-              "ViewID"
-            ]
-          },
-          "Descendants": {
-            "type": "object",
-            "properties": {
+          "Children": [
+            {
               "Data": {
-                "$ref": "#/components/schemas/Node"
+                "Type": "base_weakness",
+                "ID": "447",
+                "ViewID": "1000"
               },
-              "Children": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/Descendants"
-                }
-              }
+              "Children": null
             },
-            "example": {
+            {
               "Data": {
-                "Type": "class_weakness",
-                "ID": "671",
+                "Type": "base_weakness",
+                "ID": "798",
                 "ViewID": "1000"
               },
               "Children": [
                 {
                   "Data": {
-                    "Type": "base_weakness",
-                    "ID": "447",
+                    "Type": "variant_weakness",
+                    "ID": "259",
                     "ViewID": "1000"
                   },
                   "Children": null
                 },
                 {
                   "Data": {
-                    "Type": "base_weakness",
-                    "ID": "798",
+                    "Type": "variant_weakness",
+                    "ID": "321",
                     "ViewID": "1000"
                   },
-                  "Children": [
-                    {
-                      "Data": {
-                        "Type": "variant_weakness",
-                        "ID": "259",
-                        "ViewID": "1000"
-                      },
-                      "Children": null
-                    },
-                    {
-                      "Data": {
-                        "Type": "variant_weakness",
-                        "ID": "321",
-                        "ViewID": "1000"
-                      },
-                      "Children": null
-                    }
-                  ]
+                  "Children": null
                 }
               ]
             }
+          ]
+        }
+      },
+      "Parents": {
+        "type": "object",
+        "properties": {
+          "Type": {
+            "type": "string",
+            "format": "integer"
           },
-          "Parents": {
-            "type": "object",
-            "properties": {
-              "Type": {
-                "type": "string",
-                "format": "integer"
-              },
-              "ID": {
-                "type": "string",
-                "format": "integer"
-              },
-              "ViewID": {
-                "type": "string",
-                "format": "integer"
-              },
-              "Primary_Parent": {
-                "type": "boolean"
-              }
-            },
-            "required": [
-              "ID",
-              "Type"
-            ],
-            "example": {
-              "Type": "base_weakness",
-              "ID": "91",
-              "ViewID": "1003"
-            }
+          "ID": {
+            "type": "string",
+            "format": "integer"
           },
-          "Weakness": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "ID": {
-                "type": "string",
-                "format": "integer",
-                "example": "79"
-              },
-              "Name": {
-                "type": "string",
-                "example": "Weakness Title"
-              },
-              "Diagram": {
-                "type": "string"
-              },
-              "Abstraction": {
-                "type": "string",
-                "example": "Base"
-              },
-              "Structure": {
-                "type": "string",
-                "example": "Simple"
-              },
-              "Status": {
-                "type": "string",
-                "example": "Stable"
-              },
-              "Description": {
-                "type": "string",
-                "example": "A short description of the weakness"
-              },
-              "ExtendedDescription": {
-                "type": "string",
-                "example": "A long description of the weakness"
-              },
-              "LikelihoodOfExploit": {
-                "type": "string",
-                "example": "High"
-              },
-              "RelatedWeaknesses": {
-                "$ref": "#/components/schemas/RelatedWeaknesses"
-              },
-              "WeaknessOrdinalities": {
-                "$ref": "#/components/schemas/WeaknessOrdinalities"
-              },
-              "ApplicablePlatforms": {
-                "$ref": "#/components/schemas/ApplicablePlatforms"
-              },
-              "BackgroundDetails": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                },
-                "title": "BackgroundDetails",
-                "example": [
-                  "A short detail text",
-                  "Another detail"
-                ]
-              },
-              "AlternateTerms": {
-                "$ref": "#/components/schemas/AlternateTerms"
-              },
-              "ModesOfIntroduction": {
-                "$ref": "#/components/schemas/ModesOfIntroduction"
-              },
-              "CommonConsequences": {
-                "$ref": "#/components/schemas/Consequences"
-              },
-              "DetectionMethods": {
-                "$ref": "#/components/schemas/DetectionMethods"
-              },
-              "PotentialMitigations": {
-                "$ref": "#/components/schemas/Mitigations"
-              },
-              "DemonstrativeExamples": {
-                "$ref": "#/components/schemas/DemonstrativeExamples"
-              },
-              "ObservedExamples": {
-                "$ref": "#/components/schemas/ObservedExamples"
-              },
-              "FunctionalAreas": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                },
-                "title": "FunctionalAreas",
-                "example": [
-                  "Cryptography",
-                  "Logging",
-                  "String Processing"
-                ]
-              },
-              "AffectedResources": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                },
-                "title": "AffectedResources",
-                "example": [
-                  "System Process",
-                  "File or Directory"
-                ]
-              },
-              "TaxonomyMappings": {
-                "$ref": "#/components/schemas/TaxonomyMappings"
-              },
-              "RelatedAttackPatterns": {
-                "type": "array",
-                "items": {
-                  "type": "string",
-                  "format": "integer"
-                },
-                "title": "RelatedAttackPatterns",
-                "example": [
-                  "103",
-                  "23"
-                ]
-              },
-              "References": {
-                "$ref": "#/components/schemas/References"
-              },
-              "MappingNotes": {
-                "$ref": "#/components/schemas/MappingNotes"
-              },
-              "Notes": {
-                "$ref": "#/components/schemas/Notes"
-              },
-              "ContentHistory": {
-                "$ref": "#/components/schemas/ContentHistory"
-              }
-            },
-            "required": [
-              "Abstraction",
-              "ContentHistory",
-              "Description",
-              "ID",
-              "Name",
-              "Status",
-              "Structure"
-            ]
+          "ViewID": {
+            "type": "string",
+            "format": "integer"
           },
-          "Category": {
-            "description": "CWE Category",
-            "properties": {
-              "ID": {
-                "type": "integer",
-                "example": "12"
-              },
-              "Name": {
-                "type": "string",
-                "example": "Category Name"
-              },
-              "Status": {
-                "type": "string",
-                "example": "Draft"
-              },
-              "Summary": {
-                "type": "string",
-                "example": "A brief summary of the category"
-              },
-              "Taxonomy_Mappings": {
-                "$ref": "#/components/schemas/TaxonomyMappings"
-              },
-              "Relationships": {
-                "$ref": "#/components/schemas/Relationships"
-              },
-              "References": {
-                "$ref": "#/components/schemas/References"
-              },
-              "Notes": {
-                "$ref": "#/components/schemas/Notes"
-              },
-              "Content_History": {
-                "$ref": "#/components/schemas/ContentHistory"
-              }
-            },
-            "type": "object"
+          "Primary_Parent": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "ID",
+          "Type"
+        ],
+        "example": {
+          "Type": "base_weakness",
+          "ID": "91",
+          "ViewID": "1003"
+        }
+      },
+      "Weakness": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "ID": {
+            "type": "string",
+            "format": "integer",
+            "example": "79"
           },
-          "View": {
-            "description": "CWE View",
-            "properties": {
-              "ID": {
-                "type": "string",
-                "format": "integer",
-                "example": "12"
-              },
-              "Name": {
-                "type": "string",
-                "example": "View Name"
-              },
-              "Type": {
-                "type": "string",
-                "example": "Implicit"
-              },
-              "Status": {
-                "type": "string",
-                "example": "Stable"
-              },
-              "Objective": {
-                "type": "string",
-                "example": "A brief description of the objective of the view"
-              },
-              "Audience": {
-                "$ref": "#/components/schemas/Stakeholders"
-              },
-              "Members": {
-                "$ref": "#/components/schemas/Relationships"
-              },
-              "References": {
-                "$ref": "#/components/schemas/References"
-              },
-              "Notes": {
-                "$ref": "#/components/schemas/Notes"
-              },
-              "Content_History": {
-                "$ref": "#/components/schemas/ContentHistory"
-              }
-            },
-            "type": "object"
+          "Name": {
+            "type": "string",
+            "example": "Weakness Title"
           },
-          "AlternateTerms": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "additionalProperties": false,
-              "properties": {
-                "Term": {
-                  "type": "string",
-                  "example": "Another name for the weakness"
-                },
-                "Description": {
-                  "type": "string",
-                  "example": "A description of the term"
-                }
-              },
-              "required": [
-                "Term"
-              ]
-            }
+          "Diagram": {
+            "type": "string"
           },
-          "ApplicablePlatforms": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "additionalProperties": false,
-              "properties": {
-                "Type": {
-                  "type": "string",
-                  "example": "Language"
-                },
-                "Name": {
-                  "type": "string",
-                  "example": "Javascript"
-                },
-                "Class": {
-                  "type": "string",
-                  "example": "Language-Independent"
-                },
-                "Prevalence": {
-                  "type": "string",
-                  "example": "Often"
-                }
-              },
-              "required": [
-                "Prevalence",
-                "Type"
-              ]
-            }
+          "Abstraction": {
+            "type": "string",
+            "example": "Base"
           },
-          "Consequences": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "additionalProperties": false,
-              "properties": {
-                "Scope": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  },
-                  "example": [
-                    "Integrity",
-                    "Confidentiality"
-                  ]
-                },
-                "Impact": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  },
-                  "example": [
-                    "Read Application Data",
-                    "Modify Application Data"
-                  ]
-                },
-                "Likelihood": {
-                  "type": "array",
-                  "items": {
-                    "type": "string",
-                    "example": "High"
-                  }
-                },
-                "Note": {
-                  "type": "string",
-                  "example": "A brief note on the consequence"
-                }
-              },
-              "required": [
-                "Scope"
-              ]
-            }
+          "Structure": {
+            "type": "string",
+            "example": "Simple"
           },
-          "ContentHistory": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "additionalProperties": false,
-              "properties": {
-                "Type": {
-                  "type": "string"
-                },
-                "SubmissionName": {
-                  "type": "string"
-                },
-                "SubmissionOrganization": {
-                  "type": "string"
-                },
-                "SubmissionDate": {
-                  "type": "string",
-                  "format": "date"
-                },
-                "SubmissionVersion": {
-                  "type": "string"
-                },              
-                "SubmissionReleaseDate": {
-                  "type": "string"
-                },
-                "SubmissionComment": {
-                  "type": "string"
-                },
-                "ModificationName": {
-                  "type": "string"
-                },
-                "ModificationOrganization": {
-                  "type": "string"
-                },
-                "ModificationDate": {
-                  "type": "string",
-                  "format": "date"
-                },
-                "ModificationVersion": {
-                  "type": "string"
-                },
-                "ModificationReleaseDate": {
-                  "type": "string"
-                },
-                "ModificationComment": {
-                  "type": "string"
-                },
-                "ContributionName": {
-                  "type": "string"
-                },
-                "ContributionOrganization": {
-                  "type": "string"
-                },
-                "ContributionDate": {
-                  "type": "string",
-                  "format": "date"
-                },
-                "ContributionVersion": {
-                  "type": "string"
-                },
-                "ContributionReleaseDate": {
-                  "type": "string"
-                },
-                "ContributionComment": {
-                  "type": "string"
-                },
-                "ContributionType": {
-                  "type": "string"
-                },
-                "PreviousEntryName": {
-                  "type": "string"
-                },
-                "Date": {
-                  "type": "string",
-                  "format": "date"
-                },
-                "Version": {
-                  "type": "string"
-                }
-              },
-              "required": [
-                  "Type"
-              ]
-            },
-            "example": [
-              {
-                "Type": "Submission",
-                "SubmissionName": "PLOVER",
-                "SubmissionDate": "2006-07-19"
-              },
-              {
-                "Type": "Modification",
-                "ModificationName": "John Doe",
-                "ModificationOrganization": "ACME Corp",
-                "ModificationDate": "2008-07-01",
-                "ModificationComment": "Updated Description"
-              },
-              {
-                "Type": "Rename",
-                "PreviousEntryName": "Old name",
-                "Date": "2000-01-04"
-              }
-            ]
+          "Status": {
+            "type": "string",
+            "example": "Stable"
           },
-          "DemonstrativeExamples": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "additionalProperties": false,
-              "properties": {
-                "ID": {
-                  "type": "string",
-                  "example": "DX-60"
-                },
-                "Entries": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "additionalProperties": false,
-                    "properties": {
-                      "IntroText": {
-                        "type": "string"
-                      },
-                      "BodyText": {
-                        "type": "string"
-                      },
-                      "Nature": {
-                        "type": "string"
-                      },
-                      "Language": {
-                        "type": "string"
-                      },
-                      "ExampleCode": {
-                        "type": "string"
-                      },
-                      "Reference": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "example": [
-                    {
-                      "IntroText": "Short text at begining of example"
-                    },
-                    {
-                      "Nature": "bad",
-                      "Language": "PHP",
-                      "ExampleCode": "A markdown representation of the code"
-                    },
-                    {
-                      "BodyText": "Example text"
-                    },
-                    {
-                      "Nature": "good",
-                      "ExampleCode": "A markdown representation of the code"
-                    },
-                    {
-                      "BodyText": "Example text"
-                    },
-                    {
-                      "Reference": "REF-1990"
-                    }
-                  ]
-                }
-              },
-              "required": [
-                "Entries"
-              ]
-            }
+          "Description": {
+            "type": "string",
+            "example": "A short description of the weakness"
           },
-          "DetectionMethods": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "additionalProperties": false,
-              "properties": {
-                "DetectionMethodID": {
-                  "type": "string",
-                  "example": "DM-1"
-                },
-                "Method": {
-                  "type": "string",
-                  "example": "Automated Static Analysis"
-                },
-                "Description": {
-                  "type": "string",
-                  "example": "A brief description of the detection"
-                },
-                "Effectiveness": {
-                  "type": "string",
-                  "example": "Moderate"
-                },
-                "EffectivenessNotes": {
-                  "type": "string",
-                  "example": "A brief note on the detection effectiveness"
-                }
-              },
-              "required": [
-                "Description",
-                "Method"
-              ]
-            }
+          "ExtendedDescription": {
+            "type": "string",
+            "example": "A long description of the weakness"
           },
-          "SuggestionComment": {
-            "type": "object",
-            "properties": {
-              "Comment": {
-                "type": "string"
-              },
-              "CweID": {
-                "type": "string"
-              }
-            }
-          },
-          "MappingNotes": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "Usage": {
-                "type": "string",
-                "example": "allowed"
-              },
-              "Rationale": {
-                "type": "string",
-                "example": "A brief explanation on mapping rationale"
-              },
-              "Comments": {
-                "type": "string",
-                "example": "Comments on the mapping"
-              },
-              "Reasons": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                },
-                "example": [
-                  "Acceptable-Use",
-                  "Other"
-                ]
-              },
-              "Suggestions": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/SuggestionComment"
-                  }
-              }
-            },
-            "required": [
-                "Usage",
-                "Rationale",
-                "Comments",
-                "Reasons"
-            ]
-          },
-          "Mitigations": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "additionalProperties": false,
-              "properties": {
-                "MitigationID": {
-                  "type": "string",
-                  "example": "MIT-5"
-                },
-                "Phase": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  },
-                  "example": [
-                    "Architecture and Design",
-                    "Implementation"
-                  ]
-                },
-                "Strategy": {
-                  "type": "string",
-                  "example": "Parameterization"
-                },
-                "Description": {
-                  "type": "string",
-                  "example": "A brief description on the mitigation"
-                },
-                "Effectiveness": {
-                  "type": "string",
-                  "example": "High"
-                },
-                "EffectivenessNotes": {
-                  "type": "string",
-                  "example": "A brief example on the effectiveness of the mitigation"
-                }
-              },
-              "required": [
-                "Description"
-              ]
-            }
-          },
-          "ModesOfIntroduction": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "additionalProperties": false,
-              "properties": {
-                "Phase": {
-                  "type": "string",
-                  "example": "Architecture and Design"
-                },
-                "Note": {
-                  "type": "string",
-                  "example": "A brief note on the phase"
-                }
-              }
-            }
-          },
-          "Notes": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "additionalProperties": false,
-              "properties": {
-                "Type": {
-                  "type": "string"
-                },
-                "Note": {
-                  "type": "string"
-                }
-              },
-              "example": {
-                "Type": "Relationship",
-                "Note": "A note on the relationship"
-              },
-              "required": [
-                "Note",
-                "Type"
-              ]
-            }
-          },
-          "ObservedExamples": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "additionalProperties": false,
-              "properties": {
-                "Reference": {
-                  "type": "string",
-                  "example": "CVE-2021-1879"
-                },
-                "Description": {
-                  "type": "string",
-                  "example": "A short description of the example"
-                },
-                "Link": {
-                  "type": "string",
-                  "format": "uri",
-                  "example": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-1879"
-                }
-              },
-              "required": [
-                "Description",
-                "Link",
-                "Reference"
-              ]
-            }
-          },
-          "References": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "additionalProperties": false,
-              "properties": {
-                "ExternalReferenceID": {
-                  "type": "string"
-                },
-                "Section": {
-                  "type": "string"
-                },
-                "Authors": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "Title": {
-                  "type": "string"
-                },
-                "PublicationYear": {
-                  "type": "string",
-                  "format": "integer"
-                },
-                "PublicationMonth": {
-                  "type": "string",
-                  "format": "integer"
-                },
-                "PublicationDay": {
-                  "type": "string",
-                  "format": "integer"
-                },
-                "Publisher": {
-                  "type": "string"
-                },
-                "URL": {
-                  "type": "string",
-                  "format": "uri"
-                },
-                "URLDate": {
-                  "type": "string",
-                  "format": "date"
-                },
-                "Edition": {
-                  "type": "string"
-                },
-                "Publication": {
-                  "type": "string"
-                }
-              },
-              "example": {
-                "ExternalReferenceID": "REF-2",
-                "Section": "Chapter 11, Page 384",
-                "Authors": [
-                  "John Doe",
-                  "Jane Doe"
-                ],
-                "Title": "An Analysis of All That is Wrong With Software Development",
-                "Edition": "2nd Edition",
-                "PublicationYear": "2000",
-                "PublicationMonth": "01",
-                "PublicationDay": "01",
-                "Publisher": "Perfect Publishing",
-                "URL": "https://example.com",
-                "URLDate": "2021-10-24"
-              },
-              "required": [
-                "ExternalReferenceID"
-              ]
-            }
+          "LikelihoodOfExploit": {
+            "type": "string",
+            "example": "High"
           },
           "RelatedWeaknesses": {
+            "$ref": "#/components/schemas/RelatedWeaknesses"
+          },
+          "WeaknessOrdinalities": {
+            "$ref": "#/components/schemas/WeaknessOrdinalities"
+          },
+          "ApplicablePlatforms": {
+            "$ref": "#/components/schemas/ApplicablePlatforms"
+          },
+          "BackgroundDetails": {
             "type": "array",
             "items": {
-              "type": "object",
-              "additionalProperties": false,
-              "properties": {
-                "Nature": {
-                  "type": "string"
-                },
-                "CweID": {
-                  "type": "string",
-                  "format": "integer"
-                },
-                "ViewID": {
-                  "type": "string",
-                  "format": "integer"
-                },
-                "Ordinal": {
-                  "type": "string"
-                }
-              },
-              "required": [
-                "CweID",
-                "Nature",
-                "ViewID"
-              ]
+              "type": "string"
             },
+            "title": "BackgroundDetails",
             "example": [
-              {
-                "Nature": "ChildOf",
-                "CweID": "74",
-                "ViewID": "1000",
-                "Ordinal": "Primary"
-              },
-              {
-                "Nature": "PeerOf",
-                "CweID": "352",
-                "ViewID": "1000"
-              }
+              "A short detail text",
+              "Another detail"
             ]
           },
-          "Relationships": {
+          "AlternateTerms": {
+            "$ref": "#/components/schemas/AlternateTerms"
+          },
+          "ModesOfIntroduction": {
+            "$ref": "#/components/schemas/ModesOfIntroduction"
+          },
+          "CommonConsequences": {
+            "$ref": "#/components/schemas/Consequences"
+          },
+          "DetectionMethods": {
+            "$ref": "#/components/schemas/DetectionMethods"
+          },
+          "PotentialMitigations": {
+            "$ref": "#/components/schemas/Mitigations"
+          },
+          "DemonstrativeExamples": {
+            "$ref": "#/components/schemas/DemonstrativeExamples"
+          },
+          "ObservedExamples": {
+            "$ref": "#/components/schemas/ObservedExamples"
+          },
+          "FunctionalAreas": {
             "type": "array",
             "items": {
-              "type": "object",
-              "additionalProperties": false,
-              "properties": {
-                "CWE_ID": {
-                  "type": "string"
-                },
-                "View_ID": {
-                  "type": "string"
-                }
-              }
+              "type": "string"
             },
+            "title": "FunctionalAreas",
             "example": [
-              {
-                "CWE_ID": "123",
-                "View_ID": "321"
-              }
+              "Cryptography",
+              "Logging",
+              "String Processing"
             ]
           },
-          "Stakeholders": {
+          "AffectedResources": {
             "type": "array",
             "items": {
-              "type": "object",
-              "additionalProperties": false,
-              "properties": {
-                "Type": {
-                  "type": "string"
-                },
-                "Description": {
-                  "type": "string"
-                }
-              }
+              "type": "string"
             },
+            "title": "AffectedResources",
             "example": [
-              {
-                "Type": "Software Developers",
-                "Description": "A brief description of the audience"
-              }
+              "System Process",
+              "File or Directory"
             ]
           },
           "TaxonomyMappings": {
+            "$ref": "#/components/schemas/TaxonomyMappings"
+          },
+          "RelatedAttackPatterns": {
             "type": "array",
             "items": {
-              "type": "object",
-              "additionalProperties": false,
-              "properties": {
-                "TaxonomyName": {
-                  "type": "string"
-                },
-                "EntryName": {
-                  "type": "string"
-                },
-                "EntryID": {
-                  "type": "string"
-                },
-                "MappingFit": {
-                  "type": "string"
-                }
-              },
-              "required": [
-                "TaxonomyName"
-              ]
+              "type": "string",
+              "format": "integer"
             },
+            "title": "RelatedAttackPatterns",
             "example": [
-              {
-                "TaxonomyName": "OWASP Top Ten",
-                "EntryID": "A1",
-                "EntryName": "Cross Site Scription (XSS)",
-                "MappingFit": "Exact"
-              }
+              "103",
+              "23"
             ]
           },
-          "WeaknessOrdinalities": {
+          "References": {
+            "$ref": "#/components/schemas/References"
+          },
+          "MappingNotes": {
+            "$ref": "#/components/schemas/MappingNotes"
+          },
+          "Notes": {
+            "$ref": "#/components/schemas/Notes"
+          },
+          "ContentHistory": {
+            "$ref": "#/components/schemas/ContentHistory"
+          }
+        },
+        "required": [
+          "Abstraction",
+          "ContentHistory",
+          "Description",
+          "ID",
+          "Name",
+          "Status",
+          "Structure"
+        ]
+      },
+      "Category": {
+        "description": "CWE Category",
+        "properties": {
+          "ID": {
+            "type": "integer",
+            "example": "12"
+          },
+          "Name": {
+            "type": "string",
+            "example": "Category Name"
+          },
+          "Status": {
+            "type": "string",
+            "example": "Draft"
+          },
+          "Summary": {
+            "type": "string",
+            "example": "A brief summary of the category"
+          },
+          "Taxonomy_Mappings": {
+            "$ref": "#/components/schemas/TaxonomyMappings"
+          },
+          "Relationships": {
+            "$ref": "#/components/schemas/Relationships"
+          },
+          "References": {
+            "$ref": "#/components/schemas/References"
+          },
+          "Notes": {
+            "$ref": "#/components/schemas/Notes"
+          },
+          "Content_History": {
+            "$ref": "#/components/schemas/ContentHistory"
+          }
+        },
+        "type": "object"
+      },
+      "View": {
+        "description": "CWE View",
+        "properties": {
+          "ID": {
+            "type": "string",
+            "format": "integer",
+            "example": "12"
+          },
+          "Name": {
+            "type": "string",
+            "example": "View Name"
+          },
+          "Type": {
+            "type": "string",
+            "example": "Implicit"
+          },
+          "Status": {
+            "type": "string",
+            "example": "Stable"
+          },
+          "Objective": {
+            "type": "string",
+            "example": "A brief description of the objective of the view"
+          },
+          "Audience": {
+            "$ref": "#/components/schemas/Stakeholders"
+          },
+          "Members": {
+            "$ref": "#/components/schemas/Relationships"
+          },
+          "References": {
+            "$ref": "#/components/schemas/References"
+          },
+          "Notes": {
+            "$ref": "#/components/schemas/Notes"
+          },
+          "Content_History": {
+            "$ref": "#/components/schemas/ContentHistory"
+          }
+        },
+        "type": "object"
+      },
+      "AlternateTerms": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "Term": {
+              "type": "string",
+              "example": "Another name for the weakness"
+            },
+            "Description": {
+              "type": "string",
+              "example": "A description of the term"
+            }
+          },
+          "required": [
+            "Term"
+          ]
+        }
+      },
+      "ApplicablePlatforms": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "Type": {
+              "type": "string",
+              "example": "Language"
+            },
+            "Name": {
+              "type": "string",
+              "example": "Javascript"
+            },
+            "Class": {
+              "type": "string",
+              "example": "Language-Independent"
+            },
+            "Prevalence": {
+              "type": "string",
+              "example": "Often"
+            }
+          },
+          "required": [
+            "Prevalence",
+            "Type"
+          ]
+        }
+      },
+      "Consequences": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "Scope": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "example": [
+                "Integrity",
+                "Confidentiality"
+              ]
+            },
+            "Impact": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "example": [
+                "Read Application Data",
+                "Modify Application Data"
+              ]
+            },
+            "Likelihood": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "example": "High"
+              }
+            },
+            "Note": {
+              "type": "string",
+              "example": "A brief note on the consequence"
+            }
+          },
+          "required": [
+            "Scope"
+          ]
+        }
+      },
+      "ContentHistory": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "Type": {
+              "type": "string"
+            },
+            "SubmissionName": {
+              "type": "string"
+            },
+            "SubmissionOrganization": {
+              "type": "string"
+            },
+            "SubmissionDate": {
+              "type": "string",
+              "format": "date"
+            },
+            "SubmissionVersion": {
+              "type": "string"
+            },
+            "SubmissionReleaseDate": {
+              "type": "string"
+            },
+            "SubmissionComment": {
+              "type": "string"
+            },
+            "ModificationName": {
+              "type": "string"
+            },
+            "ModificationOrganization": {
+              "type": "string"
+            },
+            "ModificationDate": {
+              "type": "string",
+              "format": "date"
+            },
+            "ModificationVersion": {
+              "type": "string"
+            },
+            "ModificationReleaseDate": {
+              "type": "string"
+            },
+            "ModificationComment": {
+              "type": "string"
+            },
+            "ContributionName": {
+              "type": "string"
+            },
+            "ContributionOrganization": {
+              "type": "string"
+            },
+            "ContributionDate": {
+              "type": "string",
+              "format": "date"
+            },
+            "ContributionVersion": {
+              "type": "string"
+            },
+            "ContributionReleaseDate": {
+              "type": "string"
+            },
+            "ContributionComment": {
+              "type": "string"
+            },
+            "ContributionType": {
+              "type": "string"
+            },
+            "PreviousEntryName": {
+              "type": "string"
+            },
+            "Date": {
+              "type": "string",
+              "format": "date"
+            },
+            "Version": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "Type"
+          ]
+        },
+        "example": [
+          {
+            "Type": "Submission",
+            "SubmissionName": "PLOVER",
+            "SubmissionDate": "2006-07-19"
+          },
+          {
+            "Type": "Modification",
+            "ModificationName": "John Doe",
+            "ModificationOrganization": "ACME Corp",
+            "ModificationDate": "2008-07-01",
+            "ModificationComment": "Updated Description"
+          },
+          {
+            "Type": "Rename",
+            "PreviousEntryName": "Old name",
+            "Date": "2000-01-04"
+          }
+        ]
+      },
+      "DemonstrativeExamples": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "ID": {
+              "type": "string",
+              "example": "DX-60"
+            },
+            "Entries": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "IntroText": {
+                    "type": "string"
+                  },
+                  "BodyText": {
+                    "type": "string"
+                  },
+                  "Nature": {
+                    "type": "string"
+                  },
+                  "Language": {
+                    "type": "string"
+                  },
+                  "ExampleCode": {
+                    "type": "string"
+                  },
+                  "Reference": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": [
+                {
+                  "IntroText": "Short text at begining of example"
+                },
+                {
+                  "Nature": "bad",
+                  "Language": "PHP",
+                  "ExampleCode": "A markdown representation of the code"
+                },
+                {
+                  "BodyText": "Example text"
+                },
+                {
+                  "Nature": "good",
+                  "ExampleCode": "A markdown representation of the code"
+                },
+                {
+                  "BodyText": "Example text"
+                },
+                {
+                  "Reference": "REF-1990"
+                }
+              ]
+            }
+          },
+          "required": [
+            "Entries"
+          ]
+        }
+      },
+      "DetectionMethods": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "DetectionMethodID": {
+              "type": "string",
+              "example": "DM-1"
+            },
+            "Method": {
+              "type": "string",
+              "example": "Automated Static Analysis"
+            },
+            "Description": {
+              "type": "string",
+              "example": "A brief description of the detection"
+            },
+            "Effectiveness": {
+              "type": "string",
+              "example": "Moderate"
+            },
+            "EffectivenessNotes": {
+              "type": "string",
+              "example": "A brief note on the detection effectiveness"
+            }
+          },
+          "required": [
+            "Description",
+            "Method"
+          ]
+        }
+      },
+      "SuggestionComment": {
+        "type": "object",
+        "properties": {
+          "Comment": {
+            "type": "string"
+          },
+          "CweID": {
+            "type": "string"
+          }
+        }
+      },
+      "MappingNotes": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Usage": {
+            "type": "string",
+            "example": "allowed"
+          },
+          "Rationale": {
+            "type": "string",
+            "example": "A brief explanation on mapping rationale"
+          },
+          "Comments": {
+            "type": "string",
+            "example": "Comments on the mapping"
+          },
+          "Reasons": {
             "type": "array",
             "items": {
-              "type": "object",
-              "additionalProperties": false,
-              "properties": {
-                "Ordinality": {
-                  "type": "string",
-                  "example": "Resultant"
-                },
-                "Description": {
-                  "type": "string",
-                  "example": "A short description of ordinality"
-                }
-              }
+              "type": "string"
+            },
+            "example": [
+              "Acceptable-Use",
+              "Other"
+            ]
+          },
+          "Suggestions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SuggestionComment"
             }
           }
         },
-        "responses": {
-          "InternalServerError": {
-            "description": "An Internal Server Error occurred"
+        "required": [
+          "Usage",
+          "Rationale",
+          "Comments",
+          "Reasons"
+        ]
+      },
+      "Mitigations": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "MitigationID": {
+              "type": "string",
+              "example": "MIT-5"
+            },
+            "Phase": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "example": [
+                "Architecture and Design",
+                "Implementation"
+              ]
+            },
+            "Strategy": {
+              "type": "string",
+              "example": "Parameterization"
+            },
+            "Description": {
+              "type": "string",
+              "example": "A brief description on the mitigation"
+            },
+            "Effectiveness": {
+              "type": "string",
+              "example": "High"
+            },
+            "EffectivenessNotes": {
+              "type": "string",
+              "example": "A brief example on the effectiveness of the mitigation"
+            }
+          },
+          "required": [
+            "Description"
+          ]
+        }
+      },
+      "ModesOfIntroduction": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "Phase": {
+              "type": "string",
+              "example": "Architecture and Design"
+            },
+            "Note": {
+              "type": "string",
+              "example": "A brief note on the phase"
+            }
+          }
+        }
+      },
+      "Notes": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "Type": {
+              "type": "string"
+            },
+            "Note": {
+              "type": "string"
+            }
+          },
+          "example": {
+            "Type": "Relationship",
+            "Note": "A note on the relationship"
+          },
+          "required": [
+            "Note",
+            "Type"
+          ]
+        }
+      },
+      "ObservedExamples": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "Reference": {
+              "type": "string",
+              "example": "CVE-2021-1879"
+            },
+            "Description": {
+              "type": "string",
+              "example": "A short description of the example"
+            },
+            "Link": {
+              "type": "string",
+              "format": "uri",
+              "example": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-1879"
+            }
+          },
+          "required": [
+            "Description",
+            "Link",
+            "Reference"
+          ]
+        }
+      },
+      "References": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "ExternalReferenceID": {
+              "type": "string"
+            },
+            "Section": {
+              "type": "string"
+            },
+            "Authors": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "Title": {
+              "type": "string"
+            },
+            "PublicationYear": {
+              "type": "string",
+              "format": "integer"
+            },
+            "PublicationMonth": {
+              "type": "string",
+              "format": "integer"
+            },
+            "PublicationDay": {
+              "type": "string",
+              "format": "integer"
+            },
+            "Publisher": {
+              "type": "string"
+            },
+            "URL": {
+              "type": "string",
+              "format": "uri"
+            },
+            "URLDate": {
+              "type": "string",
+              "format": "date"
+            },
+            "Edition": {
+              "type": "string"
+            },
+            "Publication": {
+              "type": "string"
+            }
+          },
+          "example": {
+            "ExternalReferenceID": "REF-2",
+            "Section": "Chapter 11, Page 384",
+            "Authors": [
+              "John Doe",
+              "Jane Doe"
+            ],
+            "Title": "An Analysis of All That is Wrong With Software Development",
+            "Edition": "2nd Edition",
+            "PublicationYear": "2000",
+            "PublicationMonth": "01",
+            "PublicationDay": "01",
+            "Publisher": "Perfect Publishing",
+            "URL": "https://example.com",
+            "URLDate": "2021-10-24"
+          },
+          "required": [
+            "ExternalReferenceID"
+          ]
+        }
+      },
+      "RelatedWeaknesses": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "Nature": {
+              "type": "string"
+            },
+            "CweID": {
+              "type": "string",
+              "format": "integer"
+            },
+            "ViewID": {
+              "type": "string",
+              "format": "integer"
+            },
+            "Ordinal": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "CweID",
+            "Nature",
+            "ViewID"
+          ]
+        },
+        "example": [
+          {
+            "Nature": "ChildOf",
+            "CweID": "74",
+            "ViewID": "1000",
+            "Ordinal": "Primary"
+          },
+          {
+            "Nature": "PeerOf",
+            "CweID": "352",
+            "ViewID": "1000"
+          }
+        ]
+      },
+      "Relationships": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "CWE_ID": {
+              "type": "string"
+            },
+            "View_ID": {
+              "type": "string"
+            }
+          }
+        },
+        "example": [
+          {
+            "CWE_ID": "123",
+            "View_ID": "321"
+          }
+        ]
+      },
+      "Stakeholders": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "Type": {
+              "type": "string"
+            },
+            "Description": {
+              "type": "string"
+            }
+          }
+        },
+        "example": [
+          {
+            "Type": "Software Developers",
+            "Description": "A brief description of the audience"
+          }
+        ]
+      },
+      "TaxonomyMappings": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "TaxonomyName": {
+              "type": "string"
+            },
+            "EntryName": {
+              "type": "string"
+            },
+            "EntryID": {
+              "type": "string"
+            },
+            "MappingFit": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "TaxonomyName"
+          ]
+        },
+        "example": [
+          {
+            "TaxonomyName": "OWASP Top Ten",
+            "EntryID": "A1",
+            "EntryName": "Cross Site Scription (XSS)",
+            "MappingFit": "Exact"
+          }
+        ]
+      },
+      "WeaknessOrdinalities": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "Ordinality": {
+              "type": "string",
+              "example": "Resultant"
+            },
+            "Description": {
+              "type": "string",
+              "example": "A short description of ordinality"
+            }
           }
         }
       }
+    },
+    "responses": {
+      "InternalServerError": {
+        "description": "An Internal Server Error occurred"
+      }
     }
+  }
+}
