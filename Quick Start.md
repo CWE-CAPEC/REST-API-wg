@@ -8,11 +8,13 @@ As the CWE content changes only several times a year when there is a new release
 
 The API is available without any need to register or use any credentials.
 
-The root URL to access the API is: https<nolink>://cwe-api.mitre.org/api/v1/.  It must be appending with one of these available endpoints:
+The root URL to access the API is: https<nolink>://cwe-api.mitre.org/api/v1/.  It must be prepended to these available endpoints:
 
 ![endpoints](endpoints.png)
 
 To view detailed documentation of the endpoints, use the [Swagger editor](https://editor.swagger.io). Download the file [openapi.json](openapi.json) to your local device and then import it into the Swagger editor using **File>Import file**
+
+Note that the endpoints weakness, category, and view will return the contents of the XML file for that CWE entry expressed in JSON.  This is similar to the content that is available to download from https://cwe.mitre.org/data/downloads.html. To obtain additional information regarding relationships and membership, use the children, parents, descendants or ancestors endpoints.
 
 Note that a request for the children, parents, descendants or ancestors of an existing CWE will return an empty list, [], and a status of 200 if none exist.  However, requesting a CWE id that does not exist from one of those endpoints will return a status of 404.
 
